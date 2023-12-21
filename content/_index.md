@@ -65,7 +65,7 @@ sections:
         - title: AI Research Scientist
           company: VUNO
           company_url: ''
-          company_logo: org-vuno
+          company_logo: org-gc
           location: Seoul
           date_start: '2022-03-28'
           date_end: ''
