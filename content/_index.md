@@ -198,9 +198,8 @@ sections:
     content:
       title: Under Review
       subtitle: ''
-      items:
-        - title: 'Submission 2 papers to CVPR 2024 (Under Review)'
-
+      text: |-
+        Submission 2 papers to CVPR 2024 (Under Review)
     design:
       columns: '2'
   - block: collection
