@@ -199,6 +199,8 @@ sections:
       title: Under Review
       subtitle: ''
       text: 'ASD'
+    design:
+      columns: '2'
   - block: collection
     id: posts
     content:
