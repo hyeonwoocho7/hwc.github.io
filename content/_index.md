@@ -179,6 +179,15 @@ sections:
   #     columns: '2'
   #     view: card
   - block: collection
+    id: Underreview
+    content:
+      title: Under Review
+      subtitle: ''
+      text: |-
+        Submission 2 papers to CVPR 2024 (Under Review)
+    design:
+      columns: '2'
+  - block: collection
     id: publications
     content:
       title: Publications
@@ -193,15 +202,6 @@ sections:
     design:
       columns: '2'
       view: citation
-  - block: collection
-    id: Underreview
-    content:
-      title: Under Review
-      subtitle: ''
-      text: |-
-        Submission 2 papers to CVPR 2024 (Under Review)
-    design:
-      columns: '2'
   - block: collection
     id: posts
     content:
