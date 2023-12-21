@@ -185,8 +185,12 @@ sections:
       subtitle: ''
       text: |-
         Submission 2 papers to CVPR 2024 (Under Review)
+      filters:
+        folders:
+          - underreview
     design:
       columns: '2'
+      view: list
   - block: collection
     id: publications
     content:
