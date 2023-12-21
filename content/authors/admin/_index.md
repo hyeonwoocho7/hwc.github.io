@@ -25,12 +25,12 @@ organizations:
     url: https://www.vuno.co/
 
 # Short bio (displayed in user profile at end of posts)
-bio: My research interests include distributed robotics, mobile computing and programmable matter.
+bio: My research interests include continual learning, test-time adaptation and 3D vision.
 
 # Interests to show in About widget
 interests:
   - Continual Learning
-  - Domain Adaptation
+  - Test-time Adaptation
   - 3D vision
   - Self-Supervised Learning
   - Semi-Supervised Learning
@@ -97,12 +97,12 @@ social:
   - icon: envelope
     icon_pack: fas
     link: 'mailto:chochb123@gmail.com'
-  - icon: twitter
-    icon_pack: fab
-    link: https://twitter.com/GeorgeCushen
-    label: Follow me on Twitter
-    display:
-      header: true
+  # - icon: twitter
+  #   icon_pack: fab
+  #   link: https://twitter.com/GeorgeCushen
+  #   label: Follow me on Twitter
+  #   display:
+  #     header: true
   - icon: google-scholar # Alternatively, use `google-scholar` icon from `ai` icon pack
     icon_pack: ai
     link: https://scholar.google.com/citations?user=TiTWD9IAAAAJ&hl=ko
@@ -123,5 +123,5 @@ social:
 highlight_name: true
 ---
 
-Hyeonwoo Cho is an AI Research Scientist at the VUNO Inc. His research interests include continual learning, 3D vision and domain adaptation. He develops an early dignostic system for LUNG CT and an automatic tools for analysis of Brain MRI in VUNO Inc.
+Hyeonwoo Cho is an AI Research Scientist at the VUNO Inc. His research interests include continual learning, test-time adaptation and 3D vision. He develops an early dignostic system for LUNG CT and an automatic tools for analysis of Brain MRI in VUNO Inc.
 {style="text-align: justify;"}
