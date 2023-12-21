@@ -184,7 +184,7 @@ sections:
       title: Under Review
       subtitle: ''
       text: |-
-        Submission 2 papers to CVPR 2024 (Under Review)
+        Recently submitted 2 papers to CVPR 2024! (Under Review)
       filters:
         folders:
           - underreview
