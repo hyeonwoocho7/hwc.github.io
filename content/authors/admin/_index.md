@@ -3,7 +3,7 @@
 title: Hyeonwoo Cho
 
 # Name pronunciation (optional)
-name_pronunciation: Hyeonwoo Cho
+name_pronunciation: ''
 
 # Full name (for SEO)
 first_name: Hyeonwoo
@@ -17,7 +17,7 @@ status:
 superuser: true
 
 # Role/position/tagline
-role: AI Research Engineer at VUNO
+role: AI Research Scientist
 
 # Organizations/Affiliations to show in About widget
 organizations:
@@ -29,9 +29,12 @@ bio: My research interests include distributed robotics, mobile computing and pr
 
 # Interests to show in About widget
 interests:
-  - Artificial Intelligence
-  - Computational Linguistics
-  - Information Retrieval
+  - Continual Learning
+  - Domain Adaptation
+  - 3D vision
+  - Self-Supervised Learning
+  - Semi-Supervised Learning
+  - MultiModal
 
 # Education to show in About widget
 education:
@@ -120,5 +123,5 @@ social:
 highlight_name: true
 ---
 
-Hyeonwoo Cho is an AI Research Engineer at the VUNO Inc. His research interests include continual learning, 3D vision and Multimodal learning. He develops an early dignostic system for LUNG CT and an automatic tools for analysis of Brain MRI in VUNO Inc.
+Hyeonwoo Cho is an AI Research Scientist at the VUNO Inc. His research interests include continual learning, 3D vision and domain adaptation. He develops an early dignostic system for LUNG CT and an automatic tools for analysis of Brain MRI in VUNO Inc.
 {style="text-align: justify;"}
