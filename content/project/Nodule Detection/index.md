@@ -1,5 +1,5 @@
 ---
-title: Nodule Detection in LUNG CT
+title: Lung Cancer Detection
 summary: An example of using the in-built project page.
 tags:
   - Deep Learning
