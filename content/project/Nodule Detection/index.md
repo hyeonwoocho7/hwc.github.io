@@ -1,5 +1,5 @@
 ---
-title: Example Project
+title: Nodule Detection in LUNG CT
 summary: An example of using the in-built project page.
 tags:
   - Deep Learning
