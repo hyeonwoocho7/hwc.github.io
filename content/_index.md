@@ -75,19 +75,18 @@ sections:
               * Analysing
               * Modelling
               * Deploying
-        # - title: AI Research Scientist
-        #   company: VUNO
-        #   company_url: ''
-        #   company_logo: org-vuno
-        #   location: Seoul
-        #   date_start: '2022-03-28'
-        #   date_end: '2023-11-31'
-        #   description: |2-
-        #       Responsibilities include:
+        - title: MS in Computer Vision
+          company: Kyushu Univ.
+          company_url: ''
+          # company_logo: org-vuno
+          location: Fukuoka, Japan
+          date_start: '2020-04-01'
+          date_end: '2022-02-28'
+          description: |2-
+              Human Interface Lab:
 
-        #       * Analysing
-        #       * Modelling
-        #       * Deploying
+              * Advisor: Ryoma Bise
+              * Topic: Object Detection, Tracking and Domain Adaptation
     design:
       columns: '2'
   - block: accomplishments
