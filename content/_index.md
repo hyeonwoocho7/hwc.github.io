@@ -183,7 +183,9 @@ sections:
       title: Under Review
       subtitle: ''
       text: |-
+        {{% callout note %}}
         Recently submitted 2 papers to CVPR 2024! (Under Review)
+        {{% /callout %}}
       filters:
         folders:
           - underreview
@@ -194,10 +196,10 @@ sections:
     id: publications
     content:
       title: Publications
-      text: |-
-        {{% callout note %}}
-        Quickly discover relevant content by [filtering publications](./publication/).
-        {{% /callout %}}
+      # text: |-
+      #   {{% callout note %}}
+      #   Quickly discover relevant content by [filtering publications](./publication/).
+      #   {{% /callout %}}
       filters:
         folders:
           - publication
