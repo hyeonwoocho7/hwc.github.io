@@ -11,4 +11,5 @@ publishDate: '2023-12-21T01:35:10.028202Z'
 publication_types:
 - article-journal
 publication: '*Medical Image Analysis*'
+url_pdf: https://arxiv.org/abs/2303.05269
 ---
