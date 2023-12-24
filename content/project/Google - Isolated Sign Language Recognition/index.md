@@ -47,6 +47,8 @@ The Isolated Sign Language Recognition corpus (version 1.0) is a collection of h
 {'frame': 27, 'row_id': '27-face-0', 'type': 'face', 'landmark_index': 0, 'x': 0.4764270484447479, 'y': 0.3772650957107544, 'z': -0.05066078156232834}
 
 ### Visulization
+https://github.com/hyeonwoocho7/hwc.github.io/assets/102580131/a4f9996e-5185-4b1e-8c55-9ec8f85dcbb5
+
 
 
 ### Preprocess
