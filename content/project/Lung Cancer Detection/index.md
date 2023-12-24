@@ -9,7 +9,7 @@ date: '2023-12-23T00:00:00Z'
 external_link: ''
 
 image:
-  caption: ''
+  caption: 'photo from https://www.vuno.co/lung'
   focal_point: Smart
 
 # links:
@@ -30,13 +30,47 @@ url_video: ''
 slides: example
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus. Vestibulum sit amet erat at nulla eleifend gravida.
+## Objective
+Development of a solution for early detection and analysis of nodules that can develop into lung cancer from lung CT scan information of patients.
 
-![screen reader text](img_1.png "caption")
-Nullam vel molestie justo. Curabitur vitae efficitur leo. In hac habitasse platea dictumst. Sed pulvinar mauris dui, eget varius purus congue ac. Nulla euismod, lorem vel elementum dapibus, nunc justo porta mi, sed tempus est est vel tellus. Nam et enim eleifend, laoreet sem sit amet, elementum sem. Morbi ut leo congue, maximus velit ut, finibus arcu. In et libero cursus, rutrum risus non, molestie leo. Nullam congue quam et volutpat malesuada. Sed risus tortor, pulvinar et dictum nec, sodales non mi. Phasellus lacinia commodo laoreet. Nam mollis, erat in feugiat consectetur, purus eros egestas tellus, in auctor urna odio at nibh. Mauris imperdiet nisi ac magna convallis, at rhoncus ligula cursus.
+## Data
+### Description
+- 미국과 한국의 익명의 병원으로부터 얻어진 환자들의 약 1000개의 scan들 (Private dataset)
+- LUNA16 (Public dataset)
+### Preprocess
+![screen reader text](preprocess.png "preprocess")
+The preprocessing is performed as shown in the figure above.
+1. Since the spacing resolutions of individual raw 3D CT images are different, all CT images are resampled to the target spacing. (Spatial Resolution Preprocessing)
+2. The resampled CT images are windowed and normalized from the Hounsfield Unit (HU) value. (Intensity Preprocessing)
+### Annotation
+- Nodule coordinates and size (x, y, z, d)
+- Consensus score (number of radiologists who agree out of 4)
+### Challeges
+- **The ambiguity of the criteria for defining a nodule among radiologists.**
+- **The location of nodules is annotated in 3D CT, but information about non-nodules is insufficient.**
+- **Nodules are relatively small and rare compared to the size of a 3D CT volume.**
 
-Cras aliquam rhoncus ipsum, in hendrerit nunc mattis vitae. Duis vitae efficitur metus, ac tempus leo. Cras nec fringilla lacus. Quisque sit amet risus at ipsum pharetra commodo. Sed aliquam mauris at consequat eleifend. Praesent porta, augue sed viverra bibendum, neque ante euismod ante, in vehicula justo lorem ac eros. Suspendisse augue libero, venenatis eget tincidunt ut, malesuada at lorem. Donec vitae bibendum arcu. Aenean maximus nulla non pretium iaculis. Quisque imperdiet, nulla in pulvinar aliquet, velit quam ultrices quam, sit amet fringilla leo sem vel nunc. Mauris in lacinia lacus.
+## Method
+![screen reader text](overview.png "method")
+The figure above shows a module for detecting lung nodules. The module consists of two stages. First, it detects candidates that are suspected to be nodules from CT scans. Then, it classifies the nodules by scoring the probability of being nodules from the detected nodules through the scoring network.
 
-Suspendisse a tincidunt lacus. Curabitur at urna sagittis, dictum ante sit amet, euismod magna. Sed rutrum massa id tortor commodo, vitae elementum turpis tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean purus turpis, venenatis a ullamcorper nec, tincidunt et massa. Integer posuere quam rutrum arcu vehicula imperdiet. Mauris ullamcorper quam vitae purus congue, quis euismod magna eleifend. Vestibulum semper vel augue eget tincidunt. Fusce eget justo sodales, dapibus odio eu, ultrices lorem. Duis condimentum lorem id eros commodo, in facilisis mauris scelerisque. Morbi sed auctor leo. Nullam volutpat a lacus quis pharetra. Nulla congue rutrum magna a ornare.
+### Detection Nodule Candidates (1 stage)
+1. The problem is viewed from the scan level to the patch level by applying the sliding window method to the pre-processed 3D CT images.
+2. During training, patches that contain annotated nodules are used to train the detection network.
+3. Since the volume size of the nodule varies greatly, 3D modeling is performed considering multi-scale features. 
+    - Network composition: backbone, neck, head (Similar to CenterNet)
+    - Input: 3D patch, 3D heatmap
+    - Output: Output heatmap
+    - Consensus information is reflected in the loss function.
+4. Duplicate predictions are removed through volumetric NMS.
+5. Evaluation and Analysis 
+6. Optimization and encryption through torchscipt
+7. Deploy 
 
-Aliquam in turpis accumsan, malesuada nibh ut, hendrerit justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque sed erat nec justo posuere suscipit. Donec ut efficitur arcu, in malesuada neque. Nunc dignissim nisl massa, id vulputate nunc pretium nec. Quisque eget urna in risus suscipit ultricies. Pellentesque odio odio, tincidunt in eleifend sed, posuere a diam. Nam gravida nisl convallis semper elementum. Morbi vitae felis faucibus, vulputate orci placerat, aliquet nisi. Aliquam erat volutpat. Maecenas sagittis pulvinar purus, sed porta quam laoreet at.
+### Candidate Scoring Network (2 stage)
+1. Utilize the nodule candidate patch from the detector as inputs.
+2. Generates negative nodule patches for training.
+3. Uses test-time augmentation (TTA) to improve the recall for small nodules.
+4. Evaluation and Analysis 
+5. Optimization and encryption through torchscipt
+6. Deploy 
