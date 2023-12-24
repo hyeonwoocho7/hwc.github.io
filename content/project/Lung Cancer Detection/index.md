@@ -30,12 +30,12 @@ url_video: ''
 slides: example
 ---
 
-## Objective
+## Objective ⛳️
 Development of a solution for early detection and analysis of nodules that can develop into lung cancer from lung CT scan information of patients.
 
-## Data
+## Data 📝
 ### Description
-- 미국과 한국의 익명의 병원으로부터 얻어진 환자들의 약 1000개의 scan들 (Private dataset)
+- About 1,000 scans from anonymous hospitals in the United States, Korea, and Japan (Private dataset)
 - LUNA16 (Public dataset)
 ### Preprocess
 ![screen reader text](preprocess.png "preprocess")
@@ -45,12 +45,12 @@ The preprocessing is performed as shown in the figure above.
 ### Annotation
 - Nodule coordinates and size (x, y, z, d)
 - Consensus score (number of radiologists who agree out of 4)
-### Challeges
+### Challeges 🤔
 - **The ambiguity of the criteria for defining a nodule among radiologists.**
 - **The location of nodules is annotated in 3D CT, but information about non-nodules is insufficient.**
 - **Nodules are relatively small and rare compared to the size of a 3D CT volume.**
 
-## Method
+## Method 💡
 ![screen reader text](overview.png "method")
 The figure above shows a module for detecting lung nodules. The module consists of two stages. First, it detects candidates that are suspected to be nodules from CT scans. Then, it classifies the nodules by scoring the probability of being nodules from the detected nodules through the scoring network.
 
