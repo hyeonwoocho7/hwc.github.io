@@ -1,12 +1,12 @@
 ---
 title: Google - Isolated Sign Language Recognition 
-summary: 
+summary: The Isolated Sign Language Recognition competition's goal is to classify isolated American Sign Language (ASL) signs. You will create a TensorFlow Lite model trained on labeled landmark data extracted using the MediaPipe Holistic Solution.
 tags:
   - Deep Learning
 date: '2023-12-24T00:00:00Z'
 
 # Optional external URL for project (replaces project detail page).
-external_link: 'https://www.kaggle.com/competitions/asl-signs/overview'
+external_link: ''
 
 image:
   caption: ''
