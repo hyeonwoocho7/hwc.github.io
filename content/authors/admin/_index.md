@@ -31,6 +31,7 @@ bio: My research interests include continual learning, test-time adaptation and 
 interests:
   - Continual Learning
   - Test-time Adaptation
+  - Noisy Label Learning
   - 3D vision
   - Self-Supervised Learning
   - Semi-Supervised Learning
@@ -61,13 +62,23 @@ skills:
         icon_pack: fab
       - name: Pytorch
         description: ''
-        percent: 100
+        percent: 80
+        icon: chart-line
+        icon_pack: fas
+      - name: Pytorch Lightning
+        description: ''
+        percent: 80
         icon: chart-line
         icon_pack: fas
       - name: Docker
         description: ''
         percent: 60
         icon: docker
+        icon_pack: fab
+      - name: Git
+        description: ''
+        percent: 60
+        icon: git
         icon_pack: fab
   - name: Hobbies
     color: '#eeac02'
