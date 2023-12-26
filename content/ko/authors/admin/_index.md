@@ -43,11 +43,11 @@ education:
     # - course: PhD in Artificial Intelligence
     #   institution: Stanford University
     #   year: 2012
-    - course: MS in Information Science and Electrical Engineering
-      institution: Kyushu University
+    - course: 시스템 정보과학 석사
+      institution: 규슈대학
       year: 2022
-    - course: BS in Aeronautics and Astronautics
-      institution: Kyushu University
+    - course: 항공 우주 공학 학사
+      institution: 규슈대학
       year: 2020
 
 # Skills
