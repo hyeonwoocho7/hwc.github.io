@@ -52,49 +52,49 @@ education:
 
 # Skills
 # For available icons, see: https://docs.hugoblox.com/getting-started/page-builder/#icons
-스킬:
-  - name: 기술적
+skills:
+  - name: Technical
     items:
-      - name: 파이썬
+      - name: Python
         description: ''
         percent: 80
         icon: python
         icon_pack: fab
-      - name: 파이토치
+      - name: Pytorch
         description: ''
         percent: 80
         icon: chart-line
         icon_pack: fas
-      - name: 파이토치 라이트닝
+      - name: Pytorch Lightning
         description: ''
         percent: 80
         icon: chart-line
         icon_pack: fas
-      - name: 도커
+      - name: Docker
         description: ''
         percent: 60
         icon: docker
         icon_pack: fab
-      - name: 깃
+      - name: Git
         description: ''
         percent: 60
         icon: git
         icon_pack: fab
-  - name: 취미
+  - name: Hobbies
     color: '#eeac02'
     color_border: '#f0bf23'
     items:
-      - name: 축구
+      - name: Soccer
         description: ''
         percent: 60
         icon: futbol
         icon_pack: fas
-      - name: 여행
+      - name: Travel
         description: ''
         percent: 70
         icon: plane
         icon_pack: fas
-      - name: 조깅
+      - name: Running
         description: ''
         percent: 60
         icon: person-running

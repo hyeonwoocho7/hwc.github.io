@@ -75,7 +75,7 @@ sections:
               * 분석
               * 모델링
               * 배포
-        - title: 석사
+        - title: MS in Information Science and Electrical Engineering 
           company: 규슈대학
           company_url: ''
           # company_logo: org-vuno

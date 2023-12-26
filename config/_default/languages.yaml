@@ -12,11 +12,3 @@ en:
 ko:
  languageCode: ko
  contentDir: content/ko
-#  title: 런닝머신
-#  params:
-#    description: 몰라
-#  menu:
-#    main:
-#      - name: 나에 대해
-#        url: '#about'
-#        weight: 1
