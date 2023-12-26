@@ -52,7 +52,7 @@ sections:
       columns: '1'
   - block: experience
     content:
-      title: Experience
+      title: 경력
       # Date format for experience
       #   Refer to https://docs.hugoblox.com/customization/#date-format
       date_format: Jan 2006
@@ -62,31 +62,31 @@ sections:
       #   Leave `date_end` empty if it's your current employer.
       #   Begin multi-line descriptions with YAML's `|2-` multi-line prefix.
       items:
-        - title: AI Research Scientist (Alternative Military Service)
+        - title: AI 연구원 (전문연구요원)
           company: VUNO
           company_url: ''
           # company_logo: org-gc
-          location: Seoul
+          location: 서울
           date_start: '2022-03-28'
           date_end: ''
           description: |2-
-              Responsibilities include:
+              역할:
 
-              * Analysing
-              * Modelling
-              * Deploying
-        - title: MS in Computer Vision
-          company: Kyushu Univ.
+              * 분석
+              * 모델링
+              * 배포
+        - title: 석사
+          company: 규슈대학
           company_url: ''
           # company_logo: org-vuno
-          location: Fukuoka, Japan
+          location: 후쿠오카, 일본
           date_start: '2020-04-01'
           date_end: '2022-02-28'
           description: |2-
-              Human Interface Lab:
+              Human Interface 연구실:
 
-              * Advisor: Ryoma Bise
-              * Topic: Object Detection, Tracking and Domain Adaptation
+              * 지도교수: Ryoma Bise
+              * 주제: Object Detection, Tracking and Domain Adaptation
     design:
       columns: '2'
   # - block: accomplishments

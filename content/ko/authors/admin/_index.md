@@ -52,49 +52,49 @@ education:
 
 # Skills
 # For available icons, see: https://docs.hugoblox.com/getting-started/page-builder/#icons
-skills:
-  - name: Technical
+스킬:
+  - name: 기술적
     items:
-      - name: Python
+      - name: 파이썬
         description: ''
         percent: 80
         icon: python
         icon_pack: fab
-      - name: Pytorch
+      - name: 파이토치
         description: ''
         percent: 80
         icon: chart-line
         icon_pack: fas
-      - name: Pytorch Lightning
+      - name: 파이토치 라이트닝
         description: ''
         percent: 80
         icon: chart-line
         icon_pack: fas
-      - name: Docker
+      - name: 도커
         description: ''
         percent: 60
         icon: docker
         icon_pack: fab
-      - name: Git
+      - name: 깃
         description: ''
         percent: 60
         icon: git
         icon_pack: fab
-  - name: Hobbies
+  - name: 취미
     color: '#eeac02'
     color_border: '#f0bf23'
     items:
-      - name: Soccer
+      - name: 축구
         description: ''
         percent: 60
         icon: futbol
         icon_pack: fas
-      - name: Travel
+      - name: 여행
         description: ''
         percent: 70
         icon: plane
         icon_pack: fas
-      - name: Running
+      - name: 조깅
         description: ''
         percent: 60
         icon: person-running
@@ -133,6 +133,5 @@ social:
 # Highlight the author in author lists? (true/false)
 highlight_name: true
 ---
-
-Hyeonwoo Cho is an AI research scientist at VUNO. His research interests include continual learning, test-time adaptation, and 3D vision. He recently developed a system for early diagnosis of lung cancer. He is currently developing a tool for analyzing multiple diseases associated with dementia from brain MRI.
+Hyeonwoo Cho는 VUNO에서 AI 연구원으로 근무하고 있습니다. 그의 연구 관심사는 continual learning, test-time adaptation 및 3D vision 등 입니다. 그는 최근에 뷰노에서 폐암의 조기 진단을 위한 시스템을 개발했습니다. 그는 현재 뇌 MRI를 통해 치매와 관련된 여러 질병을 분석하는 도구를 개발 중입니다.
 {style="text-align: justify;"}
