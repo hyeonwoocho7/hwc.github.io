@@ -123,5 +123,5 @@ social:
 highlight_name: true
 ---
 
-Hyeonwoo Cho is an AI Research Scientist at the VUNO Inc. His research interests include continual learning, test-time adaptation and 3D vision. He develops an early dignostic system for LUNG CT and an automatic tools for analysis of Brain MRI in VUNO Inc.
+Hyeonwoo Cho is an AI research scientist at VUNO. His research interests include continual learning, test-time adaptation, and 3D vision. He recently developed a system for early diagnosis of lung cancer. He is currently developing a tool for analyzing multiple diseases associated with dementia from brain MRI.
 {style="text-align: justify;"}
