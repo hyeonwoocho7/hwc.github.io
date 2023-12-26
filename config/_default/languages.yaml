@@ -19,4 +19,4 @@ ko:
    main:
      - name: 나에 대해
        url: '#about'
-       weight: 2
+       weight: 1
