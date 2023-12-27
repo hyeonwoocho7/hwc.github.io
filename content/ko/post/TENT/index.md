@@ -56,9 +56,7 @@ TTA의 가정은 크게 두가지입니다.
 
 본 논문에서 TTA를 해결하기 위해 'TENT'(Test Entropy)개념을 사용합니다. 골자는 test dataset에 대한 prediction를 얻어, entropy가 작아지도록 학습하는 것입니다. 학습을 위한 objective는 다음과 같습니다.
 
-{{< /math >}}
 $$H(\hat{y})=-\sum_{c}p(\hat{y}) \ logp(\hat{y})$$
-{{< /math >}}
 
 위의 식은 정보이론에 나오는 Entropy이고, 정보의 불확실도를 표현하고 있습니다. 위의 식을 그래프로 표현하면 다음과 같습니다. x축은 확률(model 예측), y축은 Entropy입니다. 모델의 예측이 불확실할수록 Entropy가 증가함을 알 수 있습니다.
 
