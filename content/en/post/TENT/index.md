@@ -87,3 +87,6 @@ The figures below represent the feature distribution for each method, making it 
 ## Conclusion
 
 In conclusion, this paper felt like a practical approach proposing a new problem setting, TTA, that can be directly applied to the real world. The future direction of how to integrate deep learning algorithms into the real world seems to be a central focus. This is a personal perspective. As of 2023, related papers are continuously emerging in top-tier conferences based on this starting point. I recommend reading it for those interested!
+
+## Reference
+- Wang, Dequan, et al. "Tent: Fully test-time adaptation by entropy minimization." arXiv preprint arXiv:2006.10726 (2020).

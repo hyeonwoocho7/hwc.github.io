@@ -85,3 +85,6 @@ TENT는 일관적으로 모든 augmentation type에 대해서 robust하게 작�
 ## Conclusion
 
 본 논문은 TTA라는 새로운 problem setting을 제안하여 Real-World에 바로 적용가는 할 수 있는 실용적인 방법이라고 느껴졌습니다. 앞으로 딥러닝이라는 알고리즘이 어떻게 real-world에 접목을 시킬지가 중점이 되지 않을까 싶네요. 제 개인적인 견해입니다. 이 논문을 시발점으로 최근(2023년)에도 top-tier 학회에서 관련 논문들이 쏟아져나오고 있습니다. 관심있으신 분들은 읽어보시는 것을 추천드립니다!
+
+## Reference
+- Wang, Dequan, et al. "Tent: Fully test-time adaptation by entropy minimization." arXiv preprint arXiv:2006.10726 (2020).
