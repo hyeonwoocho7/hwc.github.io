@@ -90,13 +90,13 @@ Additional Regularization
 - Weak-Strong Consistency
 Since ground truth for the test is not provided in TTA, we supervise predictions for strongly-augmented target images using pseudo labels obtained from weakly-augmented target images through cross-entropy. This process effectively learns the consistency between predictions from weak and strong augmentations. In this paper, the advantage is highlighted as no confidence thresholding is performed when using refined pseudo labels under the condition of having ground truth.
 
-$$L_{t}^{ce}=-\mathbb{E}_{x_{t} \in \mathcal{X}_{t}} \sum_{c=1}^{C}\hat{y}^{c} log p_{q}^{c}$$
+ $$L_{t}^{ce}=-\mathbb{E}_{x_{t} \in \mathcal{X}_{t}} \sum_{c=1}^{C}\hat{y}^{c} log p_{q}^{c}$$
 
 - Diversity Regularization
 While the process of creating pseudo labels described above can reduce noises, it is not ideal. Therefore, the proposed method introduces a regularization term to address this issue. To promote class diversification, the model is trained with a class diversification loss.
 
-$$L_{t}^{div}=-\mathbb{E}_{x_{t} \in \mathcal{X}_{t}} \sum_{c=1}^{C} \bar{p}_{q}^{c} log \bar{p}_{q}^{c}$$
-$$\bar{p}_{q}=\mathbb{E}_{{x}_{t} \in \mathcal{X}_{t}} \sigma (g_{t}(t_{s}(x_{t})))$$
+ $$L_{t}^{div}=-\mathbb{E}_{x_{t} \in \mathcal{X}_{t}} \sum_{c=1}^{C} \bar{p}_{q}^{c} log \bar{p}_{q}^{c}$$
+ $$\bar{p}_{q}=\mathbb{E}_{{x}_{t} \in \mathcal{X}_{t}} \sigma (g_{t}(t_{s}(x_{t})))$$
 
 In the end, the model is trained for the target domain using the three aforementioned losses.
 
