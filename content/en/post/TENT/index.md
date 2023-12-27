@@ -18,7 +18,7 @@ lastmod: '2023-12-27T00:00:00Z'
 draft: false
 
 # Show this page in the Featured widget?
-featured: True
+featured: false
 
 # Featured image
 # Place an image named `featured.jpg/png` in this page's folder and customize its options here.
@@ -56,9 +56,9 @@ The assumptions of TTA can be broadly categorized into two main points:
 
 This paper introduces the concept of 'TENT' (Test Entropy) to address the TTA (Test-Time Adaptation) problem. The main idea is to obtain predictions for the test dataset and train the model to minimize entropy. The objective for training is as follows:
 
-{{< /math >}}
+
 $$H(\hat{y})=-\sum_{c}p(\hat{y}) \ logp(\hat{y})$$
-{{< /math >}}
+
 
 The above formula represents entropy in information theory, expressing the uncertainty of information. When represented graphically, with the x-axis as the probability (model predictions) and the y-axis as entropy, it is observed that entropy increases as the model's predictions become more uncertain.
 
