@@ -26,7 +26,7 @@ image:
   caption: 'Domain Shift in autonomous driving'
   focal_point: ''
   placement: 2
-  preview_only: false
+  preview_only: true
 
 authors:
   - admin

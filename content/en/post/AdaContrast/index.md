@@ -1,6 +1,6 @@
 ---
-title: TENT:FULLY TEST-TIME ADAPTATION BY ENTROPY MINIMIZATION (ICLR 2021)
-subtitle: This is review of TENT paper. 
+title: AdaContrast:Contrastive Test-Time Adaptation (CVPR 2022)
+subtitle: This is review of AdaContrast paper. 
 
 # Summary for listings and search engines
 summary: This is review of TENT paper.
@@ -23,10 +23,10 @@ featured: false
 # Featured image
 # Place an image named `featured.jpg/png` in this page's folder and customize its options here.
 image:
-  caption: 'Domain Shift in autonomous driving'
+  caption: 'Overview of AdaContrast'
   focal_point: ''
   placement: 2
-  preview_only: true
+  preview_only: false
 
 authors:
   - admin
