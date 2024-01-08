@@ -64,7 +64,7 @@ skills:
         description: ''
         percent: 60
         icon: code
-        icon_pack: fab
+        icon_pack: fas
       - name: Pytorch
         description: ''
         percent: 80
