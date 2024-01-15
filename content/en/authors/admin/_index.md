@@ -62,7 +62,7 @@ skills:
         icon_pack: fab
       - name: SQL
         description: ''
-        percent: 60
+        percent: 40
         icon: code
         icon_pack: fas
       - name: Pytorch
