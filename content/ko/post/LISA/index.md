@@ -51,11 +51,17 @@ categories:
 
 
 ## Method
-
-
  <img src="Method.png" alt="method" width="500"/>
 
+LISA의 방법은 위의 그림의 pipeline를 이해하면 됩니다. 먼저 input으로 $x_{img}, x_{txt}$를 받은 multi-modal LLM $\mathcal{F}$은 $\hat{y}_{txt}$를 출력합니다. segmentation mask를 생성하기위해서는, output $\hat{y}_{txt}$이 < SEG >를 포함해야합니다. < SEG > token에 해당하는 마지막 layer의 embedding $\hat{h}_{seg}$를 추출하여 MLP projection layer $\gamma$를  적용하여 $h_{seg}$를 얻습니다. 동시에, vision backbone $\mathcal{F}_{enc}$가 input $x_{img}$로부터 visual embedding $f$를 추출합니다. 마지막으로, $h_{seg}$와 $f$를 decoder $\mathcal{F}_{dec}$에 입력하여 최종 segmentation mask $\hat{M}$를 출력합니다.
 
+**Training Objectives.**
+위 모델은 text generation loss $L_{txt}$와 segmentation mask loss $L_{mask}$ end-to-end로 학습됩니다. $L_{txt}$는 auto-regressive crosse entropy, $L_{mask}$는 per-pixel binary cross-entropy loss와 DICE loss로 정의됩니다. 
+
+**Training Data Formulation**
+아래의 그림처럼, 3가지의 다른 타입(Semantic Segmentation, Referring Segmentation, Visual Question Answering)의 public datasets에 대해 학습을 위해서 visual question anwering에 적합한 template를 주게 됩니다. 
+
+ <img src="train_data_formulation.png" alt="method" width="500"/>
 
 ## Experiments
 
