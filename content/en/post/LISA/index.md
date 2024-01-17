@@ -12,7 +12,7 @@ projects: []
 date: '2024-01-16T00:00:00Z'
 
 # Date updated
-lastmod: '2024-01-16T00:00:00Z'
+lastmod: '2024-01-17T00:00:00Z'
 
 # Is this an unpublished draft?
 draft: false
@@ -39,7 +39,16 @@ categories:
 ---
 
 ## Introduction
+In everyday situations, users tend to instruct robots with commands like "Change the TV channel" rather than explicitly stating, "First, go to the table, find the TV remote, and press the button to change the channel." However, most perception systems depend on target objects or categories explicitly defined by humans. These systems often lack the ability to actively infer and understand user intentions from implicit instructions.
 
+This paper introduces a new segmentation task called "reasoning segmentation." This task is designed to output segmentations when given complex and implicit query text. Interestingly, the query text can encompass explicit elements like "the orange" and more complex descriptions involving reasoning or world knowledge, such as "the food with high Vitamin C." To achieve this task, the model needs two key abilities: 1) reasoning complex and implicit text queries jointly with the image, and 2) producing segmentation masks.
+
+ Leveraging the excellent understanding and inference abilities of recent Large Language Models (LLMs), the authors of this paper propose utilizing LLMs for these tasks. While many studies have applied multi-modal LLMs to accommodate visual input, these models have primarily excelled in text generation tasks and shown insufficient performance on tasks requiring fine-grained outputs like segmentation masks.
+
+The paper introduces LISA (Large Language Instructed Segmentation Assistant), which includes an additional token, "<SEG>," in the existing text to grant segmentation abilities to the multi-modal model. Upon generating the <SEG> token, its hidden embedding is decoded into the corresponding segmentation mask. Remarkably, LISA demonstrates not only zero-shot capabilities but also effective performance on complex reasoning, even when trained solely on segmentation and referring segmentation datasets. Furthermore, fine-tuning with just 239 image-instruction reasoning segmentation pairs significantly enhances LISA's performance.
+
+In summary, LISA can handle four scenarios: 1) complex reasoning, 2) world knowledge, 3) explanatory answers, and 4) multi-turn conversations. The accompanying figure provides examples of these scenarios.
+<img src="senarios.png" alt="senario" width="500"/>
 
 
 ## Method
