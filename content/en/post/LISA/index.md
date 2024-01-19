@@ -67,19 +67,40 @@ As shown in the figure below, a suitable template for visual question answering 
 
 
 
+**Trainable Parameters**
+To effectively fine-tune while maintaining the generalization ability of the pretrained multi-modal LLM $F$, [LoRA](https://arxiv.org/abs/2106.09685) is applied.
+
 ## Experiments
+**Network Architecture**
+The author employed LLaVA as a multi-modal LLM $F$ model with the ViT-H SAM backbone as the vision backbone $\mathcal{F}_ {enc}$. The projection layer $\gamma$ used an MLP with channels [256, 4096, 4096].
+
+**Evaluation Metrics**
+Evaluation of segmentation is done through gIoU and cIoU. 
+For a detailed explanation of these metrics, refer to the [Link](https://www.youtube.com/watch?v=4wXXNQ4Ylrk)
 
 
+**Reasoning Segmentation Results**
 
-## Analysis
+ <img src="Reasoning_seg_table.png" alt="Reason_Seg" width="500"/>
 
+The table above presents the evaluation results for the reasoning segmentation task. 'ft' represents the results fine-tuned with 239 reasoning image-instruction pairs. Compared to other methods, it showed an approximately 20% performance improvement. Particularly, LISA-13B outperformed LISA-7B, especially for long sentences. Existing methods were found lacking in reasoning ability or understanding of world knowledge required for reasoning segmentation, as they were designed for referring segmentation tasks.
+
+**Qualitative Results**
+
+<img src="visual_result.png" alt="vis" width="500"/>
+
+Observing the results above, the proposed method demonstrated higher reasoning ability compared to other referring segmentation methods.
 
 
 
 
 ## Conclusion
+This study introduces a new segmentation task called reasoning segmentation. This task is more challenging than the traditional referring segmentation task and requires understanding and inference for implicit user instructions. For this task, LISA, by applying segmentation capability to a multi-modal LLM, outperformed reasoning segmentation tasks with reasoning-free datasets.
 
-
+## My opinions or thinking
+- The role of the vision backbone $\mathcal{F}{enc}$ seems to be segmenting all objects in the image, while the Multi-modal LLM $F$ appears to extract embeddings for the desired instances from $x{txt}$. I wonder about the potential outcomes if $\mathcal{F}_{enc}$ fails to correctly identify all objects.
+- I'm curious about whether the correlation between visual feature $f$ and $h_{seg}$ will be orthogonal or similar. The reason is that $F$ also takes visual input $x_{img}$ to extract features, raising doubts about the necessity of extracting features from $\mathcal{F}_{enc}$.
 
 ## Reference
 - Lai, X., Tian, Z., Chen, Y., Li, Y., Yuan, Y., Liu, S., & Jia, J. (2023). Lisa: Reasoning segmentation via large language model. arXiv preprint arXiv:2308.00692.
+- Hu, E. J., Shen, Y., Wallis, P., Allen-Zhu, Z., Li, Y., Wang, S., ... & Chen, W. (2021). Lora: Low-rank adaptation of large language models. arXiv preprint arXiv:2106.09685.

@@ -63,19 +63,42 @@ LISA의 방법은 위의 그림의 pipeline를 이해하면 됩니다. 먼저 in
 
  <img src="train_data_formulation.png" alt="method" width="500"/>
 
+**Trainable Parameters**
+pretrained multi-modal LLM $F$의 generalization ability는 유지하면서 효과적으로 fine-tunning을 하기위해, [LoRA](https://arxiv.org/abs/2106.09685)를 적용합니다.
+
 ## Experiments
+**Network Architecture**
+저자는 LLaVA를 multi-modal LLM $F$ 모델로, ViT-H SAM backbone을 vision backbone $\mathcal{F}_ {enc}$으로 사용하였습니다. projection layer $\gamma$는 [256,4096,4096]의 채널의 MLP를 사용하였습니다.
+
+**Evaluation Metrics**
+Segmentation의 평가는 gIoU, cIoU를 통해 평가됩니다. 
+아래의 링크에 구체적 metric설명을 소개합니다.
+
+[Link About gIoU and cIoU](https://www.youtube.com/watch?v=4wXXNQ4Ylrk)
 
 
+**Reasoning Segmentation Results**
 
-## Analysis
+ <img src="Reasoning_seg_table.png" alt="Reason_Seg" width="500"/>
 
+위의 표는 reasoning segmentation task의 평가 결과입니다. 'ft'는 239 reasoning image-instruction pairs로 fine-tunning된 결과입니다. 다른 방법과 비교하였을때, 약 20\%의 성능향상을 보여주었다. 특히, LISA-13B가 긴 문장의 경우에 LISA-7B보다 좋은 성능을 보여주었습니다. 기존 method들은 referring segmentaion task에 맞게 설계되었기에, reasoning segmentation에 필요한 reasoning ability 또는 world knowledge의 이해가 부족함을 확인하였습니다. 
+
+**Qualitative Results**
+
+<img src="visual_result.png" alt="vis" width="500"/>
+
+위의 결과들을 보면, 제안 방법이 다른 referring segmentation method들보다 reasoning ability가 높다는 것을 관찰하였습니다. 
 
 
 
 
 ## Conclusion
+이 연구는 새로운 segmentation task인 reasoning segmentation를 제안하였습니다. 이 task는 기존 referring semgentation task보다 challenging하며 유저의 묵시적 instruction에 대해서도 이해 추론을 요구합니다. 해당 task에 대해서, LISA는 multi-modal LLM에 segmentation capbability를 적용하여 reasoning free datasets만을 가지고 reasoning segmentation task에서 outperform하였습니다.
 
-
+## My opinions or thinking
+- vision backbone $\mathcal{F}_ {enc}$의 역할은 이미지내의 모든 object를 segmentation하고, Multi-modal LLM $F$은 $x_{txt}$에서 찾고싶은 instance에 대한 embedding를 구하는거처럼 보여집니다. $\mathcal{F}_ {enc}$가 모든 object를 제대로 찾지 못하는 경우는 결과가 어떨지 궁급합니다. 
+- visual feature $f$와 $h_ {seg}$의 correlation이 orthogonal할지 similar할지 궁금합니다. 이유는, $F$도 visual input $x_{img}$를 입력으로 받아 feature를 뽑기에 굳이 $\mathcal{F}_ {enc}$에서 feature를 뽑는게 필요할까는 의문이 들었습니다. 
 
 ## Reference
 - Lai, X., Tian, Z., Chen, Y., Li, Y., Yuan, Y., Liu, S., & Jia, J. (2023). Lisa: Reasoning segmentation via large language model. arXiv preprint arXiv:2308.00692.
+- Hu, E. J., Shen, Y., Wallis, P., Allen-Zhu, Z., Li, Y., Wang, S., ... & Chen, W. (2021). Lora: Low-rank adaptation of large language models. arXiv preprint arXiv:2106.09685.
