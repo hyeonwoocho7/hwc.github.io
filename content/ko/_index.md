@@ -157,7 +157,7 @@ sections:
       subtitle: ''
       text: |-
         {{% callout note %}}
-        Recently submitted 2 papers to CVPR 2024! (Under Review)
+        Recently submitted 2 papers to CVPR 2024 and 2 papers to AAIC 2024! (Under Review)
         {{% /callout %}}
       filters:
         folders:
