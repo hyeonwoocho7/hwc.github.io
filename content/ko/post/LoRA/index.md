@@ -55,8 +55,19 @@ LoRA's key advantages
 - LoRA의 linear design은 frozen weights와 trainable matrices가 합쳐져 fully fine-tuned model과 비교하였을때, inference latency가 없습니다.
 
 
-## Method
+## Problem Statement
+LoRA의 방법은 training objective에 agnostic하지만, 이 논문에서느 language modeling를 trainig objectvie로 둡니다. 
+먼저, $\Phi$로 parameterized pre-trained autoregressive language model $P_{\Phi}(y|x)$ 있다고 가정합니다. 
+이 pre-trained model를 각 downstream conditional text generation task에 adaptation됩니다.
+full fine-tunning 하는 동안에, 모델은 pre-trained wiehgts $\Phi_{0}$로 초기화 되고 task-specific promt에 대해 conditional probabilities가 최대화하기위해 gradient가 update 되면서 모델이 $\Phi_{0}+\Delta\Phi$로 업데이트 됩니다.
+$$ \underset{\Phi}{\text{max}}\sum_{(x,y) \in \mathcal{Z}}\sum_{t=1}^{\left| y \right|}log(P_{\Phi}(y_{t}|x,y_{<t}))$$
+full fine-tunning의 주된 단점은 각 downstream task를 수행할때, $\Phi_{0}$와 같은 dimension size를 가지는 $\Delta\Phi$의 parameters를 학습한다는 것입니다. 
+따라서, chat-gpt와 같은 LLM을 fine-tunning 사용하게 되면 약 $|\Phi_{0}| \approx 175 Billon$의 parameters를 다시 학습해야하는 일이 발생합니다.
 
+이 논문에서는, task-specific parameter $\Delta\Phi = \Delta\Phi(\Theta)$를 smaller-sized set of parameters $\Theta$로 인코딩합니다.
+ $\Delta\Phi$를 찾는 task는 $\Theta$를 최적화하는것과 동치됩니다.
+ $$ \underset{\Theta}{\text{max}}\sum_{(x,y) \in \mathcal{Z}}\sum_{t=1}^{\left| y \right|}log(P_{\Phi_{0}+\Delta\Phi(\Theta)}(y_{t}|x,y_{<t}))$$
+LoRA는 low-rank representation를 사용하여 $\Delta\Phi$를 계산과 메모리적으로 효율적으로 인코딩합니다.
 
 ## Experiments
 
