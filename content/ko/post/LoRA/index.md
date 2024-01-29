@@ -56,7 +56,7 @@ LoRA's key advantages
 
 
 ## Problem Statement
-LoRA의 방법은 training objective에 agnostic하지만, 이 논문에서느 language modeling를 trainig objectvie로 둡니다. 
+LoRA의 방법은 training objective에 agnostic하지만, 이 논문에서는 language modeling를 trainig objectvie로 둡니다. 
 먼저, $\Phi$로 parameterized pre-trained autoregressive language model $P_{\Phi}(y|x)$ 있다고 가정합니다. 
 이 pre-trained model를 각 downstream conditional text generation task에 adaptation됩니다.
 full fine-tunning 하는 동안에, 모델은 pre-trained wiehgts $\Phi_{0}$로 초기화 되고 task-specific promt에 대해 conditional probabilities가 최대화하기위해 gradient가 update 되면서 모델이 $\Phi_{0}+\Delta\Phi$로 업데이트 됩니다.
@@ -69,6 +69,20 @@ full fine-tunning의 주된 단점은 각 downstream task를 수행할때, $\Phi
  $$ \underset{\Theta}{\text{max}}\sum_{(x,y) \in \mathcal{Z}}\sum_{t=1}^{\left| y \right|}log(P_{\Phi_{0}+\Delta\Phi(\Theta)}(y_{t}|x,y_{<t}))$$
 LoRA는 low-rank representation를 사용하여 $\Delta\Phi$를 계산과 메모리적으로 효율적으로 인코딩합니다.
 
+## Method
+**Low-Rank-Parameterized Update Matrices**
+
+Neural Network는 matrix 곱연산을 수행하는 많은 dense layers를 가지고 있습니다. 
+이러한 layer의 weight matrices는 full-rank를 가집니다. 
+Aghajanyan et al. [2]에 의하면, pre-trained LLM은 낮은 "내재적 차원(intrinsic dimension)"을 가지고 있으며 무작위로 작은 부분 공간으로 투영되더라도 효율적으로 학습할 수 있습니다. 
+이 논문에 영감을 받아, 이 논문 저자들은 fine-tuninng하는 중에 weight의 업데이트 또한 낮은 "intrinsic rank"를 가지고 있다는 것을 가정합니다.
+pre-trained weight $W_{0} \in \mathbb{R}^{d \times k}$에 대해, update된 weight는 $W_{o} + \Delta W = W_{o} + BA$로 표현할 수 있습니다. 
+앞선 식은 rank $r \ll min(d,k)$이고  $B \in \mathbb{R}^{d \times r}, A \in \mathbb{R}^{r \times k}$일때 성립합니다.
+학습 동안에, $A, B$는 학습되지만, $W_{0}$는 frozen하고 gradient update를 받지 않습니다.
+그럼, input $x$에 대해 forward 하여 나오는 output vector는 다음과 같습니다.
+$$h = W_{o}x + \Delta Wx = W_{o}x + \Delta BAx$$
+여기서, $A$는 random Gaussian로, $B$는 zero로 초기화합니다. 
+
 ## Experiments
 
 
@@ -79,5 +93,5 @@ LoRA는 low-rank representation를 사용하여 $\Delta\Phi$를 계산과 메모
 
 
 ## Reference
-- Lai, X., Tian, Z., Chen, Y., Li, Y., Yuan, Y., Liu, S., & Jia, J. (2023). Lisa: Reasoning segmentation via large language model. arXiv preprint arXiv:2308.00692.
-- Hu, E. J., Shen, Y., Wallis, P., Allen-Zhu, Z., Li, Y., Wang, S., ... & Chen, W. (2021). Lora: Low-rank adaptation of large language models. arXiv preprint arXiv:2106.09685.
+- [1]Hu, E. J., Shen, Y., Wallis, P., Allen-Zhu, Z., Li, Y., Wang, S., ... & Chen, W. (2021). Lora: Low-rank adaptation of large language models. arXiv preprint arXiv:2106.09685.
+- [2]Aghajanyan, A., Zettlemoyer, L., & Gupta, S. (2020). Intrinsic dimensionality explains the effectiveness of language model fine-tuning. arXiv preprint arXiv:2012.13255.
