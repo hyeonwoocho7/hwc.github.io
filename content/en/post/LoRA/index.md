@@ -35,7 +35,7 @@ tags:
   - Academic
 
 categories:
-  - General
+  - Efficient AI
 ---
 
 ## Introduction
