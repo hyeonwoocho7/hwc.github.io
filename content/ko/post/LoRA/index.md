@@ -12,7 +12,7 @@ projects: []
 date: '2024-01-22T00:00:00Z'
 
 # Date updated
-lastmod: '2024-01-22T00:00:00Z'
+lastmod: '2024-02-21T00:00:00Z'
 
 # Is this an unpublished draft?
 draft: false
@@ -82,6 +82,15 @@ pre-trained weight $W_{0} \in \mathbb{R}^{d \times k}$에 대해, update된 weig
 그럼, input $x$에 대해 forward 하여 나오는 output vector는 다음과 같습니다.
 $$h = W_{o}x + \Delta Wx = W_{o}x + \Delta BAx$$
 여기서, $A$는 random Gaussian로, $B$는 zero로 초기화합니다. 
+
+**Applying LoRA to transformer**
+
+LoRA는 Neural Network내의 어떤 weight matrix로도 대체가능하지만, 이번 연구에서는 transformer의 self attention에 사용되어지는 $W_{q}, W_{k}, W_{v}$에 적용시켰다. Transformer에 MLP module은 freeze한 상태로 실험을 진행하였다. 
+
+**Practical Benefits**
+
+가장 큰 benefit은 메모리와 저장 사용량의 감소입니다. GPT-3 175B에 대해 학습중의 VRAM를 1.2TB에서 350GB로 감소시켰다. 또한, low cost로 downstream task에 Large model을 적용할 수 있습니다. GPT-3 175B를 fine-tunning하는데 있어 full parameters학습보다 25$%$ 빠른 스피드로 학습을 할 수 있었습니다. 
+
 
 ## Experiments
 
