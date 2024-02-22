@@ -70,12 +70,23 @@ LoRA efficiently computes and encodes $\Delta\Phi$ using a low-rank representati
 
 ## Experiments
 
+<img src="results1.png" alt="Idea" width="500"/>
+
+The table above confirms significantly better performance compared to other fine-tuning methods.
+
+
+<img src="results2.png" alt="Idea" width="500"/>
+
+Moreover, as observed in the above figure, performance does not monotonically increase with increasing learning parameters. Compared to other methods, LoRA demonstrates stable scalability.
 
 
 ## Conclusion
+In this paper, we propose a method for fine-tuning with minimal resources to incorporate recently released LLMs into practical services. This study confirms that even with a small number of ranks, we can achieve representations comparable to those of significantly larger models.
+
 
 ## My opinions or thinking
-
+- Realizing that not all parameters are equally important, I anticipate further related research in the future.
+- Since $\Delta W$ is represented by two matrices, if we can also reduce $W$ itself, there may be various improvements, especially from an inference perspective.
 
 ## Reference
 - Lai, X., Tian, Z., Chen, Y., Li, Y., Yuan, Y., Liu, S., & Jia, J. (2023). Lisa: Reasoning segmentation via large language model. arXiv preprint arXiv:2308.00692.
