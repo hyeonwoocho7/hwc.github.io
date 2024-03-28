@@ -62,13 +62,26 @@ sections:
       #   Leave `date_end` empty if it's your current employer.
       #   Begin multi-line descriptions with YAML's `|2-` multi-line prefix.
       items:
+        - title: AI Research Engineer (Alternative Military Service)
+          company: OSSTEM IMPLANT
+          company_url: ''
+          # company_logo: org-gc
+          location: Seoul
+          date_start: '2024-03-15'
+          date_end: ''
+          description: |2-
+              Responsibilities include:
+
+              * Analysing
+              * Modelling
+              * Deploying
         - title: AI Research Scientist (Alternative Military Service)
           company: VUNO
           company_url: ''
           # company_logo: org-gc
           location: Seoul
           date_start: '2022-03-28'
-          date_end: ''
+          date_end: '2024-03-15'
           description: |2-
               Responsibilities include:
 

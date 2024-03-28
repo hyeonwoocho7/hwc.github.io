@@ -63,12 +63,25 @@ sections:
       #   Begin multi-line descriptions with YAML's `|2-` multi-line prefix.
       items:
         - title: AI 연구원 (전문연구요원)
+          company: OSSTEM IMPLANT
+          company_url: ''
+          # company_logo: org-gc
+          location: Seoul
+          date_start: '2024-03-15'
+          date_end: ''
+          description: |2-
+              역할:
+
+              * 분석
+              * 모델링
+              * 배포
+        - title: AI 연구원 (전문연구요원)
           company: VUNO
           company_url: ''
           # company_logo: org-gc
           location: 서울
           date_start: '2022-03-28'
-          date_end: ''
+          date_end: '2024-03-15'
           description: |2-
               역할:
 
