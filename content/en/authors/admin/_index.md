@@ -21,8 +21,8 @@ role: AI Research Scientist
 
 # Organizations/Affiliations to show in About widget
 organizations:
-  - name: VUNO Inc.
-    url: https://www.vuno.co/
+  - name: OSSTEM IMPLANT
+    url: https://en.osstem.com/
 
 # Short bio (displayed in user profile at end of posts)
 bio: My research interests include continual learning, test-time adaptation and 3D vision.
