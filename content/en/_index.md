@@ -170,7 +170,8 @@ sections:
       subtitle: ''
       text: |-
         {{% callout note %}}
-        Recently submitted 2 papers to ECCV 2024 and 2 papers to AAIC 2024! (Under Review)
+        * Recently submitted 2 papers to ECCV 2024 (Under Review)
+        * 2 papers are accepted AAIC 2024! 
         {{% /callout %}}
       filters:
         folders:
