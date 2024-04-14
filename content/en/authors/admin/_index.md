@@ -139,5 +139,5 @@ social:
 highlight_name: true
 ---
 
-Hyeonwoo Cho is an AI research scientist at VUNO. His research interests include continual learning, test-time adaptation, and 3D vision. He recently developed a system for early diagnosis of lung cancer. He is currently developing a tool for analyzing multiple diseases associated with dementia from brain MRI.
+Hyeonwoo Cho is an AI research scientist at OSSTEM IMPLANT. His research interests include continual learning, test-time adaptation, and 3D vision. He recently developed a system for early diagnosis of lung cancer and a tool for analyzing multiple diseases associated with dementia from brain MRI. He is recently developing a AI chatbot for company's Q&A website using LLM and RAG system.
 {style="text-align: justify;"}

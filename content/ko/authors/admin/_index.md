@@ -138,5 +138,5 @@ social:
 # Highlight the author in author lists? (true/false)
 highlight_name: true
 ---
-Hyeonwoo Cho는 VUNO에서 AI 연구원으로 근무하고 있습니다. 그의 연구 관심사는 continual learning, test-time adaptation 및 3D vision 등 입니다. 그는 최근에 뷰노에서 폐암의 조기 진단을 위한 시스템을 개발했습니다. 그는 현재 뇌 MRI를 통해 치매와 관련된 여러 질병을 분석하는 도구를 개발 중입니다.
+Hyeonwoo Cho는 OSSTEM IMPLANT에서 AI 연구원으로 근무하고 있습니다. 그의 연구 관심사는 continual learning, test-time adaptation 및 3D vision 등 입니다. 그는 이전에 VUNO에서 폐암의 조기 진단을 위한 시스템 및 뇌 MRI를 통해 치매와 관련된 여러 질병을 분석하는 도구을 개발했습니다. 그는 현재 LLM과 RAG를 응용하여 OSSTEM에서 Q&A chatbot를 개발하고 있습니다. 
 {style="text-align: justify;"}
