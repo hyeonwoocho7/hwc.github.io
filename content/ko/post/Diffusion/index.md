@@ -70,6 +70,24 @@ DDPM 논문에서는 아래와 같이 각 time step의 가우시안 커널들이
 
 <img src="Diffusion-kernel.png" alt="Diffusion" width="300"/>
 
+임의의 $x_{t}$를 reparamerization trick를 사용하면 아래와 같이 샘플링 할 수 있습니다.
 
 
+$$\text{Let} \ \bar{\alpha}=\prod_{s=1}^{t}(1-\beta_{s})$$
+$$ q(x_{t}|x_{0}) = \mathcal{N}(x_{t};\sqrt{\bar{\alpha}}x_{0}, (1-\bar{\alpha})\text{I})$$
+$$\text{For sampling:} \ x_{t}=\bar{\alpha}x_{0}+\sqrt{1-\bar{\alpha}}\epsilon$$
+$$ \text{where} \ \epsilon \sim \mathcal{N}(0, \text{I})$$
+
+### Reverse Diffusion Process
+
+처음에 언급한대로, Diffusion 현상은 Reverse Process가 Forward Process와 동일하게 작은 sequence내에서는 가우시안 분포를 따른다는 물리적인 intuition이 있습니다. 따라서, reverse 과정도 가우시안 분포를 따른다고 가정할 수 있습니다. 그럼, 이러한 가우시안을 딥러닝을 통해 모델링 할 수 있게 됩니다.
+
+<img src="Reverse.png" alt="Diffusion" width="300"/>
+
+$$ p(x_{T})=\mathcal{N}(x_{T};\text{0},\text{I})$$
+$$ p_{\theta}(x_{t-1}|x_{t})=\mathcal{N}(x_{t-1};\mu_{\theta}(x_{t},t), {\sigma_{t}}^{2} \text{I})$$
+즉, 네트워크는 위의 평균과 분산을 가지는 가우시안 분포를 학습하게 됩니다.
+
+전체적인 Reverse 과정을 설명하는 식은 아래와 같습니다.
+$$ p_{\theta}(x_{0:T})=p(x_{T})\prod_{t=1}^{T}p_{\theta}(x_{t-1}|x_{t})$$
 
