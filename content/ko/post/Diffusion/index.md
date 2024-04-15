@@ -55,12 +55,12 @@ Forward process는 원본 이미지에서 노이즈가 첨가되어 가는 과�
 
 ### Forward Diffusion Process
 
-Foward process는 아래의 그림처럼, 원본 이미지 $x_{0}$로부터 가이시안 노이즈를 점진적으로 첨가하면서 복수의 time step를 거쳐서 $x_{T}$로 도달하게 됩니다. 
+Foward process는 아래의 그림처럼, 원본 이미지 $x_{0}$로부터 가이시안 노이즈를 점진적으로 첨가하면서 복수의 time step를 거쳐서 $x_{T}$로 도달하게 됩니다. 원본 이미지 $x_{0}$는 step $t$가 커짐에 따라서 점차 구별할수 있는 특징을 잃어버리게 됩니다. 결국, $T \to \infty$로 가까워지면 $x_{T}$는 등방성 가우시안 분포와 동일해집니다.
 
 <img src="Forward.png" alt="Diffusion" width="300"/>
 
-위의 과정에서 각 step은 아래의 식으로 표현할 수 있습니다.
-$$ q(x_{t}|x_{t-1}) = \mathcal{N}(x_{t};\sqrt{1-\beta}x_{t-1}, \beta \text{I})$$
+위의 과정에서 각 step은 아래의 식으로 표현할 수 있습니다. 각 step size는 variance schedule $\{\beta_{t}\in(0,1)\}$에 의해 조정되어집니다.
+$$ q(x_{t}|x_{t-1}) = \mathcal{N}(x_{t};\sqrt{1-\beta_{t}}x_{t-1}, \beta_{t} \text{I})$$
 일반적으로 $\beta$는 0에 가까운 작은 값을 가지기에, 위의 식을 해석해보면 이전 step의 값을 감소시키면서 $\beta$ 노이즈를 더해주는것으로 foward process를 정의할 수 있습니다.
 
 전체 과정은 아래의 식처럼,  $x_{0}$라는 이미지가 주어지게 되면 그 이미지에 노이즈를 조금씩 추가하는 $x_{1}$에서 $x_{T}$까지 과정을 아래의 joint distribution으로 표현 가능합니다. 
@@ -71,8 +71,14 @@ DDPM 논문에서는 아래와 같이 각 time step의 가우시안 커널들이
 <img src="Diffusion-kernel.png" alt="Diffusion" width="300"/>
 
 임의의 $x_{t}$를 reparamerization trick를 사용하면 아래와 같이 샘플링 할 수 있습니다.
-
-
+여기서, $\alpha=1-\beta_{t}$ 그리고 $\bar{\alpha_{t}} = \prod_{i=1}^{t} \alpha_{i}$라고 둡니다.
+$$
+\begin{align}
+x_{t} &=\sqrt{\alpha_{t}}x_{t-1}+\sqrt{1-\alpha_{t}}\epsilon_{t-1} \\
+& = \sqrt{\alpha_{t}}(\sqrt{\alpha_{t-1}}x_{t-2}+\sqrt{1-\alpha_{t-1}}\epsilon_{t-2})+\sqrt{1-\alpha_{t}}\epsilon_{t-1} \\
+& = \sqrt{\alpha_{t}\alpha_{t-1}}x_{t-2}
+\end{align}
+$$
 $$\text{Let} \ \bar{\alpha}=\prod_{s=1}^{t}(1-\beta_{s})$$
 $$ q(x_{t}|x_{0}) = \mathcal{N}(x_{t};\sqrt{\bar{\alpha}}x_{0}, (1-\bar{\alpha})\text{I})$$
 $$\text{For sampling:} \ x_{t}=\bar{\alpha}x_{0}+\sqrt{1-\bar{\alpha}}\epsilon$$
@@ -89,5 +95,6 @@ $$ p_{\theta}(x_{t-1}|x_{t})=\mathcal{N}(x_{t-1};\mu_{\theta}(x_{t},t), {\sigma_
 즉, 네트워크는 위의 평균과 분산을 가지는 가우시안 분포를 학습하게 됩니다.
 
 전체적인 Reverse 과정을 설명하는 식은 아래와 같습니다.
+
 $$ p_{\theta}(x_{0:T})=p(x_{T})\prod_{t=1}^{T}p_{\theta}(x_{t-1}|x_{t})$$
 
