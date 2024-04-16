@@ -108,6 +108,17 @@ $$
 \begin{align}
 q(x_{t-1}|x_{t},x_{0})&=q(x_{t}|x_{t-1},x_{0})\frac{q(x_{t-1}|x_{0})}{q(x_{t}|x_{0})} \\
 &\propto  \text{exp}(-\frac{1}{2}(\frac{(x_{t}-\sqrt{\alpha_{t}}x_{t-1})^{2}}{\beta_{t}}+\frac{(x_{t-1}-\sqrt{\bar{\alpha}_{t-1}}x_{0})^{2}}{1-\bar{\alpha}_{t-1}}-\frac{(x_{t}-\sqrt{\bar{\alpha}_{t}}x_{0})^{2}}{1-\bar{\alpha}_{t}})) \\
-&= \text{exp}(-\frac{1}{2})
+&= \text{exp}(-\frac{1}{2}(\frac{x_{t}^2-2\sqrt{\alpha_{t}}x_{t}x_{t-1}+\alpha_{t}x_{t-1}^2}{\beta_{t}}+\frac{x_{t-1}^2-2\sqrt{\bar\alpha_{t-1}}x_{0}x_{t-1}+\bar\alpha_{t-1}x_{0}^2}{1-\bar\alpha_{t-1}}-\frac{(x_{t}-\sqrt{\bar{\alpha}_{t}}x_{0})^{2}}{1-\bar{\alpha}_{t}})) \\
+&= \text{exp}(-\frac{1}{2}((\frac{\alpha_{t}}{\beta_{t}}+\frac{1}{1-\bar\alpha_{t-1}})x_{t-1}^2-(\frac{2\sqrt{\alpha_{t}}}{\beta_{t}}x_{t}+\frac{2\sqrt{\bar\alpha_{t-1}}}{1-\bar\alpha_{t-1}}x_{0})x_{t-1}+C(x_{t},x_{0})))
+\end{align}
+$$
+여기서, $C(x_{t},x_{0})$는 $x_{t-1}$를 포함하지 않는 함수입니다. standard gaussian density function에 의해, 평균과 분산은 아래와 같이 parameterized됩니다.
+$$\tilde{\beta}=1/(\frac{\alpha_{t}}{\beta_{t}}+\frac{1}{1-\bar\alpha_{t-1}})=\frac{1-\bar\alpha_{t-1}}{1-\bar\alpha_{t}}\cdot\beta_{t}$$
+$$
+\begin{align}
+\tilde{\mu}(x_{t}, x_{0})&=(\frac{\sqrt{\alpha_{t}}}{\beta_{t}}x_{t}+\frac{\sqrt{\bar\alpha_{t-1}}}{1-\bar\alpha_{t-1}}x_{0})\frac{1-\bar\alpha_{t-1}}{1-\bar\alpha_{t}}\cdot\beta_{t} \\
+&= \frac{\sqrt{\alpha_{t}}(1-\bar\alpha_{t-1})}{(1-\bar\alpha_{t})}x_{t}+\frac{\sqrt{\bar\alpha_{t-1}}\beta_{t}}{1-\bar\alpha_{t}}x_{0} \\
+&= \frac{\sqrt{\alpha_{t}}(1-\bar\alpha_{t-1})}{(1-\bar\alpha_{t})}x_{t}+\frac{\sqrt{\bar\alpha_{t-1}}\beta_{t}}{1-\bar\alpha_{t}}\frac{1}{\sqrt{\bar\alpha_{t}}}(x_{t}-\sqrt{1-\bar\alpha_{t}}\epsilon_{t}) \\
+&= \frac{1}{\sqrt{\alpha_{t}}}(x_{t}-\frac{1-\alpha_{t}}{\sqrt{1-\bar\alpha_{t}}}\epsilon_{t})
 \end{align}
 $$
