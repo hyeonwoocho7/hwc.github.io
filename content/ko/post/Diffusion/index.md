@@ -51,13 +51,13 @@ Diffusion 아래의 그림과 같이 잉크를 물에 첨가하였을 때 퍼지
 Diffusion은 아래의 그림과 같이 forward, reverse process로 구성됩니다. 
 Forward process는 원본 이미지에서 노이즈가 첨가되어 가는 과정, Reverse process는 노이즈에서 원본 이미지로 생성하는 과정입니다.
 
-<img src="Diffusion.png" alt="Diffusion" width="300"/>
+<img src="Diffusion.png" alt="Diffusion" width="400" height="150"/>
 
 ### Forward Diffusion Process
 
 Foward process는 아래의 그림처럼, 원본 이미지 $x_{0}$로부터 가이시안 노이즈를 점진적으로 첨가하면서 복수의 time step를 거쳐서 $x_{T}$로 도달하게 됩니다. 원본 이미지 $x_{0}$는 step $t$가 커짐에 따라서 점차 구별할수 있는 특징을 잃어버리게 됩니다. 결국, $T \to \infty$로 가까워지면 $x_{T}$는 등방성 가우시안 분포와 동일해집니다.
 
-<img src="Forward.png" alt="Diffusion" width="300"/>
+<img src="Forward.png" alt="Diffusion" width="400" height="150"/>
 
 위의 과정에서 각 step은 아래의 식으로 표현할 수 있습니다. 각 step size는 variance schedule $\{\beta_{t}\in(0,1)\}$에 의해 조정되어집니다.
 $$ q(x_{t}|x_{t-1}) = \mathcal{N}(x_{t};\sqrt{1-\beta_{t}}x_{t-1}, \beta_{t} \text{I})$$
@@ -68,18 +68,22 @@ $$ q(x_{1:T}|x_{0}) = \prod_{t=1}^{T}q(x_{t}|x_{t-1})$$
 
 DDPM 논문에서는 아래와 같이 각 time step의 가우시안 커널들이 연속적이기에 어떤 time step $t$에서 만들어지는 이미지를 정의할 수 있게 됩니다.
 
-<img src="Diffusion-kernel.png" alt="Diffusion" width="300"/>
+<img src="Diffusion-kernel.png" alt="Diffusion" width="400" height="150"/>
 
 임의의 $x_{t}$를 reparamerization trick를 사용하면 아래와 같이 샘플링 할 수 있습니다.
-여기서, $\alpha=1-\beta_{t}$ 그리고 $\bar{\alpha_{t}} = \prod_{i=1}^{t} \alpha_{i}$라고 둡니다.
+여기서, $\alpha=1-\beta_{t}$ 그리고 $\bar{\alpha_{t}} = \prod_{i=1}^{t} \alpha_{i}$라고 두고 $x_{t}$를 아래와 같이 유도할 수 있습니다.  
 $$
 \begin{align}
 x_{t} &=\sqrt{\alpha_{t}}x_{t-1}+\sqrt{1-\alpha_{t}}\epsilon_{t-1} \\
 & = \sqrt{\alpha_{t}}(\sqrt{\alpha_{t-1}}x_{t-2}+\sqrt{1-\alpha_{t-1}}\epsilon_{t-2})+\sqrt{1-\alpha_{t}}\epsilon_{t-1} \\
-& = \sqrt{\alpha_{t}\alpha_{t-1}}x_{t-2}
+& = \sqrt{\alpha_{t}\alpha_{t-1}}x_{t-2}+\sqrt{\alpha_{t}(1-\alpha_{t-1})}\epsilon_{t-2}+\sqrt{1-\alpha_{t}}\epsilon_{t-1} \\
+& = \sqrt{\alpha_{t}\alpha_{t-1}}x_{t-2}+\sqrt{1-\alpha_{t}\alpha_{t-1}}\epsilon_{t-2} \\
+& = \sqrt{\bar{\alpha_{t}}}x_{0} + \sqrt{1-\bar{\alpha_{t}}}\epsilon
 \end{align}
 $$
-$$\text{Let} \ \bar{\alpha}=\prod_{s=1}^{t}(1-\beta_{s})$$
+식(3)에서 식(4)과정에는 두 개의 서로 다른 분산 $\mathcal{N}(0, \sigma_{1}^2), \mathcal{N}(0, \sigma_{2}^2)$을 가지는 가우시안 분포를 합치면 다음과 같은 하나의 분포로  $\mathcal{N}(0, (\sigma_{1}^2+\sigma_{2}^2)\text{I})$ 표현가능한 점을 이용하여 식을 전개했습니다.
+
+그렇다면, 아래와 같이 $q(x_{t}|x_{0})$를 평균이 $\sqrt{\bar{\alpha}}x_{0}$, 분산이 $(1-\bar{\alpha})$인 가우시안 분포로 표현됩니다.
 $$ q(x_{t}|x_{0}) = \mathcal{N}(x_{t};\sqrt{\bar{\alpha}}x_{0}, (1-\bar{\alpha})\text{I})$$
 $$\text{For sampling:} \ x_{t}=\bar{\alpha}x_{0}+\sqrt{1-\bar{\alpha}}\epsilon$$
 $$ \text{where} \ \epsilon \sim \mathcal{N}(0, \text{I})$$
@@ -88,13 +92,22 @@ $$ \text{where} \ \epsilon \sim \mathcal{N}(0, \text{I})$$
 
 처음에 언급한대로, Diffusion 현상은 Reverse Process가 Forward Process와 동일하게 작은 sequence내에서는 가우시안 분포를 따른다는 물리적인 intuition이 있습니다. 따라서, reverse 과정도 가우시안 분포를 따른다고 가정할 수 있습니다. 그럼, 이러한 가우시안을 딥러닝을 통해 모델링 할 수 있게 됩니다.
 
-<img src="Reverse.png" alt="Diffusion" width="300"/>
+<img src="Reverse.png" alt="Diffusion" width="400" height="150"/>
 
-$$ p(x_{T})=\mathcal{N}(x_{T};\text{0},\text{I})$$
-$$ p_{\theta}(x_{t-1}|x_{t})=\mathcal{N}(x_{t-1};\mu_{\theta}(x_{t},t), {\sigma_{t}}^{2} \text{I})$$
+$q(x_{t-1}|x_{t})$를 directly 추정하는 것은 모든 데이터셋이 있어야 가능한 일이기에 구하는 것은 현실적으로 매우 어렵습니다. 그 대신, 우리가 학습할 딥러닝 모델 $p_{\theta}$가 앞선 conditional probability $q(x_{t-1}|x_{t})$를 approximate하도록 학습을 진행합니다.
+특히, 아래와 같이 $x_{0}$가 주어졌을 때, 역조건부 확률 $q(x_{t-1}|x_{t})$를 추정할 수 있게 됩니다.
+$$q(x_{t-1}|x_{t}, x_{0}) = \mathcal{N}(x_{t-1}; \tilde{\mu}(x_{t}, x_{0}),\tilde{\beta}\text{I} )$$
+
+그리고 전체적인 Reverse 과정은 아래와 같습니다.
+
+$$ p_{\theta}(x_{0:T})=p(x_{T})\prod_{t=1}^Tp_{\theta}(x_{t-1}|x_{t}), \ p_{\theta}(x_{t-1}|x_{t})=\mathcal{N}(x_{t-1};\mu_{\theta}(x_{t},t), \sum_{\theta}(x_t,t))$$
 즉, 네트워크는 위의 평균과 분산을 가지는 가우시안 분포를 학습하게 됩니다.
 
-전체적인 Reverse 과정을 설명하는 식은 아래와 같습니다.
-
-$$ p_{\theta}(x_{0:T})=p(x_{T})\prod_{t=1}^{T}p_{\theta}(x_{t-1}|x_{t})$$
-
+베이즈 룰을 적용하면 $q(x_{t-1}|x_{t})$를 아래처럼 유도가능하게 됩니다.
+$$
+\begin{align}
+q(x_{t-1}|x_{t},x_{0})&=q(x_{t}|x_{t-1},x_{0})\frac{q(x_{t-1}|x_{0})}{q(x_{t}|x_{0})} \\
+&\propto  \text{exp}(-\frac{1}{2}(\frac{(x_{t}-\sqrt{\alpha_{t}}x_{t-1})^{2}}{\beta_{t}}+\frac{(x_{t-1}-\sqrt{\bar{\alpha}_{t-1}}x_{0})^{2}}{1-\bar{\alpha}_{t-1}}-\frac{(x_{t}-\sqrt{\bar{\alpha}_{t}}x_{0})^{2}}{1-\bar{\alpha}_{t}})) \\
+&= \text{exp}(-\frac{1}{2})
+\end{align}
+$$
