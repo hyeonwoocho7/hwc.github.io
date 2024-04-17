@@ -143,6 +143,28 @@ $$
 \begin{align}
 L_{VLB} &= \mathbb{E}_{q(x_{0:T})}\left [\text{log}\frac{q(\text{x}_{1:T}|\text{x}_{0})}{p_{\theta}(\text{x}_{0:T})}\right ] \\
 &= \mathbb{E}_q \left [\text{log}\frac{\prod_{t=1}^Tq(\text{x}_{t}|\text{x}_{t-1})}{p_{\theta}(\text{x}_{T})\prod_{t=1}^{T}p_{\theta}(\text{x}_{t-1}|\text{x}_{t})}  \right ] \\
-&= 
+&= \mathbb{E}_q\left [-\text{log}p_{\theta}(\text{x}_{T})+\prod_{t=1}^T\text{log}\frac{q(\text{x}_{t}|\text{x}_{t-1})}{p_{\theta}(\text{x}_{t-1}|\text{x}_{t})} \right ] \\
+&= \mathbb{E}_q\left [-\text{log}p_{\theta}(\text{x}_{T})+\prod_{t=2}^T\text{log}\frac{q(\text{x}_{t}|\text{x}_{t-1})}{p_{\theta}(\text{x}_{t-1}|\text{x}_{t})}+\text{log}\frac{q(\text{x}_{1}|\text{x}_{0})}{p_{\theta}(\text{x}_{0}|\text{x}_{1})} \right ] \\
+&= \mathbb{E}_q\left [-\text{log}p_{\theta}(\text{x}_{T})+\prod_{t=2}^T\text{log}(\frac{q(\text{x}_{t-1}|\text{x}_{t}, \text{x}_{0})}{p_{\theta}(\text{x}_{t-1}|\text{x}_{t})} \cdot \frac{q(\text{x}_{t}|\text{x}_0)}{q(\text{x}_{t-1}|\text{x}_0)})+\text{log}\frac{q(\text{x}_{1}|\text{x}_{0})}{p_{\theta}(\text{x}_{0}|\text{x}_{1})} \right ] \\
+&= \mathbb{E}_q\left [-\text{log}p_{\theta}(\text{x}_{T})+\prod_{t=2}^T\text{log}\frac{q(\text{x}_{t-1}|\text{x}_{t}, \text{x}_{0})}{p_{\theta}(\text{x}_{t-1}|\text{x}_{t})}  + \prod_{t=2}^T\text{log}\frac{q(\text{x}_{t}|\text{x}_0)}{q(\text{x}_{t-1}|\text{x}_0)}+\text{log}\frac{q(\text{x}_{1}|\text{x}_{0})}{p_{\theta}(\text{x}_{0}|\text{x}_{1})} \right ] \\
+&= \mathbb{E}_q\left [-\text{log}p_{\theta}(\text{x}_{T})+\prod_{t=2}^T\text{log}\frac{q(\text{x}_{t-1}|\text{x}_{t}, \text{x}_{0})}{p_{\theta}(\text{x}_{t-1}|\text{x}_{t})}  + \text{log}\frac{q(\text{x}_{T}|\text{x}_0)}{q(\text{x}_{1}|\text{x}_0)}+\text{log}\frac{q(\text{x}_{1}|\text{x}_{0})}{p_{\theta}(\text{x}_{0}|\text{x}_{1})} \right ] \\
+&= \mathbb{E}_q\left [-\text{log}\frac{q(\text{x}_{T}|\text{x}_{0})}{p_{\theta}(\text{x}_{T})} + \prod_{t=2}^T\text{log}\frac{q(\text{x}_{t-1}|\text{x}_{t}, \text{x}_{0})}{p_{\theta}(\text{x}_{t-1}|\text{x}_{t})}-\text{log}p_{\theta}(\text{x}_{0}|\text{x}_{1})\right ] \\
+&= \mathbb{E}_q\left [D_{KL}(q(\text{x}_{T}|\text{x}_{0}) || p_{\theta}(\text{x}_{T})) + \prod_{t=2}^TD_{KL}(q(\text{x}_{t-1}|\text{x}_{t}, \text{x}_{0}) || p_{\theta}(\text{x}_{t-1}|\text{x}_{t}))-\text{log}p_{\theta}(\text{x}_{0}|\text{x}_{1})\right ]
 \end{align}
 $$
+위의 식으로부터, $L_{VLB}$는 다음과 같이 분리됩니다.
+$$
+\begin{align}
+L_{VLB}&=L_{T}+L_{T-1}+\cdot\cdot\cdot+L_{0} \\
+\text{where} \ L_{T}&=D_{KL}(q(\text{x}_{T}|\text{x}_{0}) || p_{\theta}(\text{x}_{T})) \\
+L_{t}&=D_{KL}(q(\text{x}_{t}|\text{x}_{t+1}, \text{x}_{0}) || p_{\theta}(\text{x}_{t}|\text{x}_{t+1})) \ \text{for} \ 1 \le t \le T-1 \\
+L_{0}&=-\text{log}p_{\theta}(\text{x}_{0}|\text{x}_{1})
+\end{align}
+$$
+
+$L_{T}$와 $L_{t}$는 두개의 가우시안 분포를 비교하는 항이 됩니다. 특히, $L_{T}$는 $q$가 학습 파라미터가 없고 $\text{x}_{T}$는 가우시안 노이즈이기에 constant한 값을 가진다는 것을 알 수 있습니다. 
+
+
+### $L_{t}$를 학습하기 위한 Parameter로!
+위에서 언급한대로, Reverse 과정에는 Neural Network $p_{\theta}(\text{x}_{t-1}|\text{x}_{t})=\mathcal{N}(\text{x}_{t-1};\mu_{\theta}(\text{x}_{t},t), \sum_{\theta}(\text{x}_t,t))$가 conditional probability $q(\text{x}_{t-1}|\text{x}_{t})$를 approximate하도록 학습를 합니다. 그렇다면, $p_{\theta}(\text{x}_{t-1}|\text{x}_{t})$의 평균 $\mu_{\theta}$가 $q(\text{x}_{t-1}|\text{x}_{t})$의 평균 $\tilde{\mu}=\frac{1}{\sqrt{\alpha_{t}}}(\text{x}_{t}-\frac{1-\alpha_{t}}{\sqrt{1-\bar\alpha_{t}}}\epsilon_{t})$를 예측하도록 학습하면 된다는 것입니다. 학습하는 과정에서는 우리는 $\text{x}_{t}$를 샘플링할 수 있기에, 가우시안 노이즈 항을 reparameterize함으로써 time step t에서 $\text{x}_{t}$로부터 $\epsilon_{t}$를 예측하는 문제로 대치할 수 있습니다.
+
