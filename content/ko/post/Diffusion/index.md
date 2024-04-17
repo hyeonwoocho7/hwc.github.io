@@ -55,37 +55,37 @@ Forward process는 원본 이미지에서 노이즈가 첨가되어 가는 과�
 
 ### Forward Diffusion Process
 
-Foward process는 아래의 그림처럼, 원본 이미지 $x_{0}$로부터 가이시안 노이즈를 점진적으로 첨가하면서 복수의 time step를 거쳐서 $x_{T}$로 도달하게 됩니다. 원본 이미지 $x_{0}$는 step $t$가 커짐에 따라서 점차 구별할수 있는 특징을 잃어버리게 됩니다. 결국, $T \to \infty$로 가까워지면 $x_{T}$는 등방성 가우시안 분포와 동일해집니다.
+Foward process는 아래의 그림처럼, 원본 이미지 $\text{x}_{0}$로부터 가이시안 노이즈를 점진적으로 첨가하면서 복수의 time step를 거쳐서 $\text{x}_{T}$로 도달하게 됩니다. 원본 이미지 $\text{x}_{0}$는 step $t$가 커짐에 따라서 점차 구별할수 있는 특징을 잃어버리게 됩니다. 결국, $T \to \infty$로 가까워지면 $\text{x}_{T}$는 등방성 가우시안 분포와 동일해집니다.
 
 <img src="Forward.png" alt="Diffusion" width="400" height="150"/>
 
 위의 과정에서 각 step은 아래의 식으로 표현할 수 있습니다. 각 step size는 variance schedule $\{\beta_{t}\in(0,1)\}$에 의해 조정되어집니다.
-$$ q(x_{t}|x_{t-1}) = \mathcal{N}(x_{t};\sqrt{1-\beta_{t}}x_{t-1}, \beta_{t} \text{I})$$
+$$ q(\text{x}_{t}|\text{x}_{t-1}) = \mathcal{N}(\text{x}_{t};\sqrt{1-\beta_{t}}\text{x}_{t-1}, \beta_{t} \text{I})$$
 일반적으로 $\beta$는 0에 가까운 작은 값을 가지기에, 위의 식을 해석해보면 이전 step의 값을 감소시키면서 $\beta$ 노이즈를 더해주는것으로 foward process를 정의할 수 있습니다.
 
-전체 과정은 아래의 식처럼,  $x_{0}$라는 이미지가 주어지게 되면 그 이미지에 노이즈를 조금씩 추가하는 $x_{1}$에서 $x_{T}$까지 과정을 아래의 joint distribution으로 표현 가능합니다. 
-$$ q(x_{1:T}|x_{0}) = \prod_{t=1}^{T}q(x_{t}|x_{t-1})$$
+전체 과정은 아래의 식처럼,  $\text{x}_{0}$라는 이미지가 주어지게 되면 그 이미지에 노이즈를 조금씩 추가하는 $\text{x}_{1}$에서 $\text{x}_{T}$까지 과정을 아래의 joint distribution으로 표현 가능합니다. 
+$$ q(\text{x}_{1:T}|\text{x}_{0}) = \prod_{t=1}^{T}q(\text{x}_{t}|\text{x}_{t-1})$$
 
 DDPM 논문에서는 아래와 같이 각 time step의 가우시안 커널들이 연속적이기에 어떤 time step $t$에서 만들어지는 이미지를 정의할 수 있게 됩니다.
 
 <img src="Diffusion-kernel.png" alt="Diffusion" width="400" height="150"/>
 
-임의의 $x_{t}$를 reparamerization trick를 사용하면 아래와 같이 샘플링 할 수 있습니다.
-여기서, $\alpha=1-\beta_{t}$ 그리고 $\bar{\alpha_{t}} = \prod_{i=1}^{t} \alpha_{i}$라고 두고 $x_{t}$를 아래와 같이 유도할 수 있습니다.  
+임의의 $\text{x}_{t}$를 reparamerization trick를 사용하면 아래와 같이 샘플링 할 수 있습니다.
+여기서, $\alpha=1-\beta_{t}$ 그리고 $\bar{\alpha_{t}} = \prod_{i=1}^{t} \alpha_{i}$라고 두고 $\text{x}_{t}$를 아래와 같이 유도할 수 있습니다.  
 $$
 \begin{align}
-x_{t} &=\sqrt{\alpha_{t}}x_{t-1}+\sqrt{1-\alpha_{t}}\epsilon_{t-1} \\
-& = \sqrt{\alpha_{t}}(\sqrt{\alpha_{t-1}}x_{t-2}+\sqrt{1-\alpha_{t-1}}\epsilon_{t-2})+\sqrt{1-\alpha_{t}}\epsilon_{t-1} \\
-& = \sqrt{\alpha_{t}\alpha_{t-1}}x_{t-2}+\sqrt{\alpha_{t}(1-\alpha_{t-1})}\epsilon_{t-2}+\sqrt{1-\alpha_{t}}\epsilon_{t-1} \\
-& = \sqrt{\alpha_{t}\alpha_{t-1}}x_{t-2}+\sqrt{1-\alpha_{t}\alpha_{t-1}}\epsilon_{t-2} \\
-& = \sqrt{\bar{\alpha_{t}}}x_{0} + \sqrt{1-\bar{\alpha_{t}}}\epsilon
+\text{x}_{t} &=\sqrt{\alpha_{t}}\text{x}_{t-1}+\sqrt{1-\alpha_{t}}\epsilon_{t-1} \\
+& = \sqrt{\alpha_{t}}(\sqrt{\alpha_{t-1}}\text{x}_{t-2}+\sqrt{1-\alpha_{t-1}}\epsilon_{t-2})+\sqrt{1-\alpha_{t}}\epsilon_{t-1} \\
+& = \sqrt{\alpha_{t}\alpha_{t-1}}\text{x}_{t-2}+\sqrt{\alpha_{t}(1-\alpha_{t-1})}\epsilon_{t-2}+\sqrt{1-\alpha_{t}}\epsilon_{t-1} \\
+& = \sqrt{\alpha_{t}\alpha_{t-1}}\text{x}_{t-2}+\sqrt{1-\alpha_{t}\alpha_{t-1}}\epsilon_{t-2} \\
+& = \sqrt{\bar{\alpha_{t}}}\text{x}_{0} + \sqrt{1-\bar{\alpha_{t}}}\epsilon
 \end{align}
 $$
 식(3)에서 식(4)과정에는 두 개의 서로 다른 분산 $\mathcal{N}(0, \sigma_{1}^2), \mathcal{N}(0, \sigma_{2}^2)$을 가지는 가우시안 분포를 합치면 다음과 같은 하나의 분포로  $\mathcal{N}(0, (\sigma_{1}^2+\sigma_{2}^2)\text{I})$ 표현가능한 점을 이용하여 식을 전개했습니다.
 
-그렇다면, 아래와 같이 $q(x_{t}|x_{0})$를 평균이 $\sqrt{\bar{\alpha}}x_{0}$, 분산이 $(1-\bar{\alpha})$인 가우시안 분포로 표현됩니다.
-$$ q(x_{t}|x_{0}) = \mathcal{N}(x_{t};\sqrt{\bar{\alpha}}x_{0}, (1-\bar{\alpha})\text{I})$$
-$$\text{For sampling:} \ x_{t}=\bar{\alpha}x_{0}+\sqrt{1-\bar{\alpha}}\epsilon$$
+그렇다면, 아래와 같이 $q(\text{x}_{t}|\text{x}_{0})$를 평균이 $\sqrt{\bar{\alpha}}\text{x}_{0}$, 분산이 $(1-\bar{\alpha})$인 가우시안 분포로 표현됩니다.
+$$ q(\text{x}_{t}|\text{x}_{0}) = \mathcal{N}(\text{x}_{t};\sqrt{\bar{\alpha}}\text{x}_{0}, (1-\bar{\alpha})\text{I})$$
+$$\text{For sampling:} \ \text{x}_{t}=\bar{\alpha}\text{x}_{0}+\sqrt{1-\bar{\alpha}}\epsilon$$
 $$ \text{where} \ \epsilon \sim \mathcal{N}(0, \text{I})$$
 
 ### Reverse Diffusion Process
@@ -94,31 +94,55 @@ $$ \text{where} \ \epsilon \sim \mathcal{N}(0, \text{I})$$
 
 <img src="Reverse.png" alt="Diffusion" width="400" height="150"/>
 
-$q(x_{t-1}|x_{t})$를 directly 추정하는 것은 모든 데이터셋이 있어야 가능한 일이기에 구하는 것은 현실적으로 매우 어렵습니다. 그 대신, 우리가 학습할 딥러닝 모델 $p_{\theta}$가 앞선 conditional probability $q(x_{t-1}|x_{t})$를 approximate하도록 학습을 진행합니다.
-특히, 아래와 같이 $x_{0}$가 주어졌을 때, 역조건부 확률 $q(x_{t-1}|x_{t})$를 추정할 수 있게 됩니다.
-$$q(x_{t-1}|x_{t}, x_{0}) = \mathcal{N}(x_{t-1}; \tilde{\mu}(x_{t}, x_{0}),\tilde{\beta}\text{I} )$$
+$q(\text{x}_{t-1}|\text{x}_{t})$를 directly 추정하는 것은 모든 데이터셋이 있어야 가능한 일이기에 구하는 것은 현실적으로 매우 어렵습니다. 그 대신, 우리가 학습할 딥러닝 모델 $p_{\theta}$가 앞선 conditional probability $q(\text{x}_{t-1}|\text{x}_{t})$를 approximate하도록 학습을 진행합니다.
+특히, 아래와 같이 $\text{x}_{0}$가 주어졌을 때, 역조건부 확률 $q(\text{x}_{t-1}|\text{x}_{t})$를 추정할 수 있게 됩니다.
+$$q(\text{x}_{t-1}|\text{x}_{t}, \text{x}_{0}) = \mathcal{N}(\text{x}_{t-1}; \tilde{\mu}(\text{x}_{t}, \text{x}_{0}),\tilde{\beta}\text{I} )$$
 
 그리고 전체적인 Reverse 과정은 아래와 같습니다.
 
-$$ p_{\theta}(x_{0:T})=p(x_{T})\prod_{t=1}^Tp_{\theta}(x_{t-1}|x_{t}), \ p_{\theta}(x_{t-1}|x_{t})=\mathcal{N}(x_{t-1};\mu_{\theta}(x_{t},t), \sum_{\theta}(x_t,t))$$
+$$ p_{\theta}(\text{x}_{0:T})=p(\text{x}_{T})\prod_{t=1}^Tp_{\theta}(\text{x}_{t-1}|\text{x}_{t}), \ p_{\theta}(\text{x}_{t-1}|\text{x}_{t})=\mathcal{N}(\text{x}_{t-1};\mu_{\theta}(\text{x}_{t},t), \sum_{\theta}(\text{x}_t,t))$$
 즉, 네트워크는 위의 평균과 분산을 가지는 가우시안 분포를 학습하게 됩니다.
 
-베이즈 룰을 적용하면 $q(x_{t-1}|x_{t})$를 아래처럼 유도가능하게 됩니다.
+베이즈 룰을 적용하면 $q(\text{x}_{t-1}|\text{x}_{t})$를 아래처럼 유도가능하게 됩니다.
 $$
 \begin{align}
-q(x_{t-1}|x_{t},x_{0})&=q(x_{t}|x_{t-1},x_{0})\frac{q(x_{t-1}|x_{0})}{q(x_{t}|x_{0})} \\
-&\propto  \text{exp}(-\frac{1}{2}(\frac{(x_{t}-\sqrt{\alpha_{t}}x_{t-1})^{2}}{\beta_{t}}+\frac{(x_{t-1}-\sqrt{\bar{\alpha}_{t-1}}x_{0})^{2}}{1-\bar{\alpha}_{t-1}}-\frac{(x_{t}-\sqrt{\bar{\alpha}_{t}}x_{0})^{2}}{1-\bar{\alpha}_{t}})) \\
-&= \text{exp}(-\frac{1}{2}(\frac{x_{t}^2-2\sqrt{\alpha_{t}}x_{t}x_{t-1}+\alpha_{t}x_{t-1}^2}{\beta_{t}}+\frac{x_{t-1}^2-2\sqrt{\bar\alpha_{t-1}}x_{0}x_{t-1}+\bar\alpha_{t-1}x_{0}^2}{1-\bar\alpha_{t-1}}-\frac{(x_{t}-\sqrt{\bar{\alpha}_{t}}x_{0})^{2}}{1-\bar{\alpha}_{t}})) \\
-&= \text{exp}(-\frac{1}{2}((\frac{\alpha_{t}}{\beta_{t}}+\frac{1}{1-\bar\alpha_{t-1}})x_{t-1}^2-(\frac{2\sqrt{\alpha_{t}}}{\beta_{t}}x_{t}+\frac{2\sqrt{\bar\alpha_{t-1}}}{1-\bar\alpha_{t-1}}x_{0})x_{t-1}+C(x_{t},x_{0})))
+q(\text{x}_{t-1}|\text{x}_{t},\text{x}_{0})&=q(\text{x}_{t}|\text{x}_{t-1},\text{x}_{0})\frac{q(\text{x}_{t-1}|\text{x}_{0})}{q(\text{x}_{t}|\text{x}_{0})} \\
+&\propto  \text{exp}(-\frac{1}{2}(\frac{(\text{x}_{t}-\sqrt{\alpha_{t}}\text{x}_{t-1})^{2}}{\beta_{t}}+\frac{(\text{x}_{t-1}-\sqrt{\bar{\alpha}_{t-1}}\text{x}_{0})^{2}}{1-\bar{\alpha}_{t-1}}-\frac{(\text{x}_{t}-\sqrt{\bar{\alpha}_{t}}\text{x}_{0})^{2}}{1-\bar{\alpha}_{t}})) \\
+&= \text{exp}(-\frac{1}{2}(\frac{\text{x}_{t}^2-2\sqrt{\alpha_{t}}\text{x}_{t}\text{x}_{t-1}+\alpha_{t}\text{x}_{t-1}^2}{\beta_{t}}+\frac{\text{x}_{t-1}^2-2\sqrt{\bar\alpha_{t-1}}\text{x}_{0}\text{x}_{t-1}+\bar\alpha_{t-1}\text{x}_{0}^2}{1-\bar\alpha_{t-1}}-\frac{(\text{x}_{t}-\sqrt{\bar{\alpha}_{t}}\text{x}_{0})^{2}}{1-\bar{\alpha}_{t}})) \\
+&= \text{exp}(-\frac{1}{2}((\frac{\alpha_{t}}{\beta_{t}}+\frac{1}{1-\bar\alpha_{t-1}})\text{x}_{t-1}^2-(\frac{2\sqrt{\alpha_{t}}}{\beta_{t}}\text{x}_{t}+\frac{2\sqrt{\bar\alpha_{t-1}}}{1-\bar\alpha_{t-1}}\text{x}_{0})\text{x}_{t-1}+C(\text{x}_{t},\text{x}_{0})))
 \end{align}
 $$
-여기서, $C(x_{t},x_{0})$는 $x_{t-1}$를 포함하지 않는 함수입니다. standard gaussian density function에 의해, 평균과 분산은 아래와 같이 parameterized됩니다.
+여기서, $C(\text{x}_{t},\text{x}_{0})$는 $\text{x}_{t-1}$를 포함하지 않는 함수입니다. standard gaussian density function에 의해, 평균과 분산은 아래와 같이 parameterized됩니다.
+
 $$\tilde{\beta}=1/(\frac{\alpha_{t}}{\beta_{t}}+\frac{1}{1-\bar\alpha_{t-1}})=\frac{1-\bar\alpha_{t-1}}{1-\bar\alpha_{t}}\cdot\beta_{t}$$
 $$
+
 \begin{align}
-\tilde{\mu}(x_{t}, x_{0})&=(\frac{\sqrt{\alpha_{t}}}{\beta_{t}}x_{t}+\frac{\sqrt{\bar\alpha_{t-1}}}{1-\bar\alpha_{t-1}}x_{0})\frac{1-\bar\alpha_{t-1}}{1-\bar\alpha_{t}}\cdot\beta_{t} \\
-&= \frac{\sqrt{\alpha_{t}}(1-\bar\alpha_{t-1})}{(1-\bar\alpha_{t})}x_{t}+\frac{\sqrt{\bar\alpha_{t-1}}\beta_{t}}{1-\bar\alpha_{t}}x_{0} \\
-&= \frac{\sqrt{\alpha_{t}}(1-\bar\alpha_{t-1})}{(1-\bar\alpha_{t})}x_{t}+\frac{\sqrt{\bar\alpha_{t-1}}\beta_{t}}{1-\bar\alpha_{t}}\frac{1}{\sqrt{\bar\alpha_{t}}}(x_{t}-\sqrt{1-\bar\alpha_{t}}\epsilon_{t}) \\
-&= \frac{1}{\sqrt{\alpha_{t}}}(x_{t}-\frac{1-\alpha_{t}}{\sqrt{1-\bar\alpha_{t}}}\epsilon_{t})
+\tilde{\mu}(\text{x}_{t}, \text{x}_{0})&=(\frac{\sqrt{\alpha_{t}}}{\beta_{t}}\text{x}_{t}+\frac{\sqrt{\bar\alpha_{t-1}}}{1-\bar\alpha_{t-1}}\text{x}_{0})\frac{1-\bar\alpha_{t-1}}{1-\bar\alpha_{t}}\cdot\beta_{t} \\
+&= \frac{\sqrt{\alpha_{t}}(1-\bar\alpha_{t-1})}{(1-\bar\alpha_{t})}\text{x}_{t}+\frac{\sqrt{\bar\alpha_{t-1}}\beta_{t}}{1-\bar\alpha_{t}}\text{x}_{0} \\
+&= \frac{\sqrt{\alpha_{t}}(1-\bar\alpha_{t-1})}{(1-\bar\alpha_{t})}\text{x}_{t}+\frac{\sqrt{\bar\alpha_{t-1}}\beta_{t}}{1-\bar\alpha_{t}}\frac{1}{\sqrt{\bar\alpha_{t}}}(\text{x}_{t}-\sqrt{1-\bar\alpha_{t}}\epsilon_{t}) \\
+&= \frac{1}{\sqrt{\alpha_{t}}}(\text{x}_{t}-\frac{1-\alpha_{t}}{\sqrt{1-\bar\alpha_{t}}}\epsilon_{t})
+\end{align}
+$$
+
+아래의 그림처럼, 이러한 setup는 VAE와 비슷하기에 variational lower bound를 사용하여 negative log-likelihood를 최적화하게 됩니다.  
+<img src="VAE.png" alt="Diffusion" width="400" height="150"/>
+
+$$
+\begin{align}
+-\text{log}p_{\theta}(\text{x}_{0}) &\leq -\text{log}p_{\theta}(\text{x}_{0}) + D_{KL}(q(\text{x}_{1:T}|\text{x}_{0})||p_{\theta}(\text{x}_{1:T}|\text{x}_{0})) \\
+&= -\text{log}p_{\theta}(\text{x}_{0}) + \mathbb{E}_{\text{x}_{1:T} \sim q(\text{x}_{1:T}|\text{x}_{0})}\left [\text{log}\frac{q(\text{x}_{1:T}|\text{x}_{0})}{p_{\theta}(\text{x}_{0:T})/p_{\theta}(\text{x}_{0})}  \right ] \\
+&= -\text{log}p_{\theta}(\text{x}_{0}) + \mathbb{E}_{q}\left [\text{log}\frac{q(\text{x}_{1:T}|\text{x}_{0})}{p_{\theta}(\text{x}_{0:T})}+\text{log}p_{\theta}(\text{x}_{0})  \right ] \\
+&= \mathbb{E}_{q}\left [\text{log}\frac{q(\text{x}_{1:T}|\text{x}_{0})}{p_{\theta}(\text{x}_{0:T})}\right ] \\
+\text{Let} \ L_{VLB} &= \mathbb{E}_{q(x_{0:T})}\left [\text{log}\frac{q(\text{x}_{1:T}|\text{x}_{0})}{p_{\theta}(\text{x}_{0:T})}\right ] \geq \mathbb{E}_{q(x_{0})}\text{log}p_{\theta}(\text{x}_{0})
+\end{align}
+$$
+
+$L_{VLB}$는 아래와 같이 KL-divergence 및 entropy term으로 전개할 수 있습니다.
+$$
+\begin{align}
+L_{VLB} &= \mathbb{E}_{q(x_{0:T})}\left [\text{log}\frac{q(\text{x}_{1:T}|\text{x}_{0})}{p_{\theta}(\text{x}_{0:T})}\right ] \\
+&= \mathbb{E}_q \left [\text{log}\frac{\prod_{t=1}^Tq(\text{x}_{t}|\text{x}_{t-1})}{p_{\theta}(\text{x}_{T})\prod_{t=1}^{T}p_{\theta}(\text{x}_{t-1}|\text{x}_{t})}  \right ] \\
+&= 
 \end{align}
 $$
