@@ -55,7 +55,7 @@ Forward process는 원본 이미지에서 노이즈가 첨가되어 가는 과�
 
 ### Forward Diffusion Process
 
-Foward process는 아래의 그림처럼, 원본 이미지 $\text{x}_{0}$로부터 가이시안 노이즈를 점진적으로 첨가하면서 복수의 time step를 거쳐서 $\text{x}_{T}$로 도달하게 됩니다. 원본 이미지 $\text{x}_{0}$는 step $t$가 커짐에 따라서 점차 구별할수 있는 특징을 잃어버리게 됩니다. 결국, $T \to \infty$로 가까워지면 $\text{x}_{T}$는 등방성 가우시안 분포와 동일해집니다.
+Foward process는 아래의 그림처럼, 원본 이미지 ${\text{x}}_{0}$로부터 가이시안 노이즈를 점진적으로 첨가하면서 복수의 time step를 거쳐서 $\text{x}_{T}$로 도달하게 됩니다. 원본 이미지 $\text{x}_{0}$는 step $t$가 커짐에 따라서 점차 구별할수 있는 특징을 잃어버리게 됩니다. 결국, $T \to \infty$로 가까워지면 $\text{x}_{T}$는 등방성 가우시안 분포와 동일해집니다.
 
 <img src="Forward.png" alt="Diffusion" width="400" height="150"/>
 
@@ -166,5 +166,31 @@ $L_{T}$와 $L_{t}$는 두개의 가우시안 분포를 비교하는 항이 됩�
 
 
 ### $L_{t}$를 학습하기 위한 Parameter로!
-위에서 언급한대로, Reverse 과정에는 Neural Network $p_{\theta}(\text{x}_{t-1}|\text{x}_{t})=\mathcal{N}(\text{x}_{t-1};\mu_{\theta}(\text{x}_{t},t), \sum_{\theta}(\text{x}_t,t))$가 conditional probability $q(\text{x}_{t-1}|\text{x}_{t})$를 approximate하도록 학습를 합니다. 그렇다면, $p_{\theta}(\text{x}_{t-1}|\text{x}_{t})$의 평균 $\mu_{\theta}$가 $q(\text{x}_{t-1}|\text{x}_{t})$의 평균 $\tilde{\mu}=\frac{1}{\sqrt{\alpha_{t}}}(\text{x}_{t}-\frac{1-\alpha_{t}}{\sqrt{1-\bar\alpha_{t}}}\epsilon_{t})$를 예측하도록 학습하면 된다는 것입니다. 학습하는 과정에서는 우리는 $\text{x}_{t}$를 샘플링할 수 있기에, 가우시안 노이즈 항을 reparameterize함으로써 time step t에서 $\text{x}_{t}$로부터 $\epsilon_{t}$를 예측하는 문제로 대치할 수 있습니다.
+위에서 언급한대로, Reverse 과정에는 Neural Network $p_{\theta}(\text{x}_{t-1}|\text{x}_{t})=\mathcal{N}(\text{x}_{t-1};\mu_{\theta}(\text{x}_{t},t), \sum_{\theta}(\text{x}_t,t))$가 conditional probability $q(\text{x}_{t-1}|\text{x}_{t})$를 approximate하도록 학습를 합니다. 그렇다면, $p_{\theta}(\text{x}_{t-1}|\text{x}_{t})$의 평균 $\mu_{\theta}$가 $q(\text{x}_{t-1}|\text{x}_{t})$의 평균 $\tilde{\mu}=\frac{1}{\sqrt{\alpha_{t}}}(\text{x}_{t}-\frac{1-\alpha_{t}}{\sqrt{1-\bar\alpha_{t}}}\epsilon_{t})$를 예측하도록 학습하면 된다는 것입니다. 학습하는 과정에서는 우리는 ${\text{x}}_{t}$를 샘플링할 수 있기에, 가우시안 노이즈 항을 reparameterize함으로써 time step $t$에서 $\text{x}_{t}$로부터 $\epsilon_{t}$를 예측하는 문제로 대치할 수 있습니다.
+$$
+\begin{align}
+\mu_{\theta}(\text{x}_{t},t)&=\frac{1}{\sqrt{\alpha_{t}}}(\text{x}_{t}-\frac{1-\alpha_{t}}{\sqrt{1-\bar\alpha_{t}}}\epsilon_{\theta}(\text{x}_{t},t)) \\
+\text{Thus} \ \text{x}_{t-1}&=\mathcal{N}(\text{x}_{t-1};\frac{1}{\sqrt{\alpha_{t}}}(\text{x}_{t}-\frac{1-\alpha_{t}}{\sqrt{1-\bar\alpha_{t}}}\epsilon_{t}(\text{x}_{t},t)), \sum_{\theta}(\text{x}_t,t))
+\end{align}
+$$
+
+$L_{t}$는 $\tilde{\mu}$와 차이를 최소하는 방향으로 학습됩니다.
+
+$$
+\begin{align}
+L_{t}&=\mathbb{E}_{\text{x}_{0},\epsilon}\left [\frac{1}{2\left\|\sum_{\theta}(\text{x}_{t},t) \right\|_{2}^{2}}\left\| \tilde{\mu}(\text{x}_{t},t)-\mu_{\theta}(\text{x}_{t},t)\right\|^{2}  \right ] \\
+&=\mathbb{E}_{\text{x}_{0},\epsilon}\left [\frac{1}{2\left\|\sum_{\theta} \right\|_{2}^{2}}\left\|\frac{1}{\sqrt{\alpha_{t}}}(\text{x}_{t}-\frac{1-\alpha_{t}}{\sqrt{1-\bar\alpha_{t}}}\epsilon_{t})- \frac{1}{\sqrt{\alpha_{t}}}(\text{x}_{t}-\frac{1-\alpha_{t}}{\sqrt{1-\bar\alpha_{t}}}\epsilon_{\theta}(\text{x}_{t},t))\right\|^{2}\right ] \\
+&=\mathbb{E}_{\text{x}_{0},\epsilon}\left [\frac{(1-\alpha_{t})^{2}}{2\alpha_{t}(1-\bar{\alpha}_{t})\left\|\sum_{\theta} \right\|_{2}^{2}}\left\|\epsilon_{t}-\epsilon_{\theta}(\text{x}_{t},t)\right\|^{2}\right ] \\
+&=\mathbb{E}_{\text{x}_{0},\epsilon}\left [\frac{(1-\alpha_{t})^{2}}{2\alpha_{t}(1-\bar{\alpha}_{t})\left\|\sum_{\theta} \right\|_{2}^{2}}\left\|\epsilon_{t}-\epsilon_{\theta}(\sqrt{\bar{\alpha_{t}}}\text{x}_{0} + \sqrt{1-\bar{\alpha_{t}}}\epsilon_{t},t)\right\|^{2}\right ] \\
+\end{align}
+$$
+
+DDPM의 실험에서 위의 식의 앞부분인 weighting term은 무시하는게 diffusion model이 더 잘 작동된다는 결과로부터 아래의 식으로 simplify할 수 있습니다.
+$$
+\begin{align}
+L_{t}^{simple}&=\mathbb{E}_{t \sim [1,T],\text{x}_{0},\epsilon_{t}}\left [\left\|\epsilon_{t}-\epsilon_{\theta}(\text{x}_{t},t) \right\|^{2}  \right ] \\
+&=\mathbb{E}_{t \sim [1,T],\text{x}_{0},\epsilon_{t}}\left [\left\|\epsilon_{t}-\epsilon_{\theta}(\sqrt{\bar{\alpha_{t}}}\text{x}_{0} + \sqrt{1-\bar{\alpha_{t}}}\epsilon_{t},t) \right\|^{2}  \right ]
+\end{align}
+$$
+
 
