@@ -55,7 +55,7 @@ Forward process는 원본 이미지에서 노이즈가 첨가되어 가는 과�
 
 ### Forward Diffusion Process
 
-Foward process는 아래의 그림처럼, 원본 이미지 $\mathbf{x}_{0}$로부터 가이시안 노이즈를 점진적으로 첨가하면서 복수의 time step를 거쳐서 $\mathbf{x}_{T}$로 도달하게 됩니다. 원본 이미지 $\mathbf{x}_{0}$는 step $t$가 커짐에 따라서 점차 구별할수 있는 특징을 잃어버리게 됩니다. 결국, $T \to \infty$로 가까워지면 $\mathbf{x}_{T}$는 등방성 가우시안 분포와 동일해집니다.
+Foward process는 아래의 그림처럼, 원본 이미지 $\mathbf{x}_ {0}$로부터 가이시안 노이즈를 점진적으로 첨가하면서 복수의 time step를 거쳐서 $\mathbf{x}_{T}$로 도달하게 됩니다. 원본 이미지 $\mathbf{x}_{0}$는 step $t$가 커짐에 따라서 점차 구별할수 있는 특징을 잃어버리게 됩니다. 결국, $T \to \infty$로 가까워지면 $\mathbf{x}_{T}$는 등방성 가우시안 분포와 동일해집니다.
 
 <img src="Forward.png" alt="Diffusion" width="400" height="150"/>
 
