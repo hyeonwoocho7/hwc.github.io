@@ -72,16 +72,17 @@ DDPM 논문에서는 아래와 같이 각 time step의 가우시안 커널들이
 
 임의의 $\mathbf{x}_ {t}$를 reparamerization trick를 사용하면 아래와 같이 샘플링 할 수 있습니다.
 여기서, $\alpha=1-\beta_{t}$ 그리고 $\bar{\alpha_{t}} = \prod_{i=1}^{t} \alpha_{i}$라고 두고 $\mathbf{x}_ {t}$를 아래와 같이 유도할 수 있습니다.  
-$
-\begin{align}
+{{< math >}}
+$$
+\begin{aligned}
 \mathbf{x}_ {t} &=\sqrt{\alpha_{t}}\mathbf{x}_ {t-1}+\sqrt{1-\alpha_{t}}\epsilon_{t-1} \\
 & = \sqrt{\alpha_{t}}(\sqrt{\alpha_{t-1}}\mathbf{x}_ {t-2}+\sqrt{1-\alpha_{t-1}}\epsilon_{t-2})+\sqrt{1-\alpha_{t}}\epsilon_{t-1} \\
 & = \sqrt{\alpha_{t}\alpha_{t-1}}\mathbf{x}_ {t-2}+\sqrt{\alpha_{t}(1-\alpha_{t-1})}\epsilon_{t-2}+\sqrt{1-\alpha_{t}}\epsilon_{t-1} \\
 & = \sqrt{\alpha_{t}\alpha_{t-1}}\mathbf{x}_ {t-2}+\sqrt{1-\alpha_{t}\alpha_{t-1}}\epsilon_{t-2} \\
 & = \sqrt{\bar{\alpha_{t}}}\mathbf{x}_ {0} + \sqrt{1-\bar{\alpha_{t}}}\epsilon
-\end{align}
-$
-
+\end{aligned}
+$$
+{{< math >}}
 식(3)에서 식(4)과정에는 두 개의 서로 다른 분산 $\mathcal{N}(0, \sigma_{1}^2), \mathcal{N}(0, \sigma_{2}^2)$을 가지는 가우시안 분포를 합치면 다음과 같은 하나의 분포로  $\mathcal{N}(0, (\sigma_{1}^2+\sigma_{2}^2)\text{I})$ 표현가능한 점을 이용하여 식을 전개했습니다.
 
 그렇다면, 아래와 같이 $q(\mathbf{x}_ {t}|\mathbf{x}_ {0})$를 평균이 $\sqrt{\bar{\alpha}}\mathbf{x}_ {0}$, 분산이 $(1-\bar{\alpha})$인 가우시안 분포로 표현됩니다.
