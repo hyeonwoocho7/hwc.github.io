@@ -113,7 +113,7 @@ $$
 
 $$
 \begin{align}
-q(\mathbf{x}_ {t-1}|\mathbf{x}_ {t},\mathbf{x}_ {0}) &= q(\mathbf{x}_ {t}|\mathbf{x}_ {t-1},\mathbf{x}_ {0})\frac{q(\mathbf{x}_ {t-1}|\mathbf{x}_ {0})}{q(\mathbf{x}_ {t}|\mathbf{x}_ {0})} \\\\\\
+q(\mathbf{x}_ {t-1}|\mathbf{x}_ {t},\mathbf{x}_ {0}) &= q(\mathbf{x}_ {t}|\mathbf{x}_ {t-1},\mathbf{x}_ {0})\frac{q(\mathbf{x}_ {t-1}|\mathbf{x}_ {0})}{q(\mathbf{x}_ {t}|\mathbf{x}_ {0})} \\\\\
 
 & \propto  \text{exp}(-\frac{1}{2}(\frac{(\mathbf{x}_ {t}-\sqrt{\alpha_{t}}\mathbf{x}_ {t-1})^{2}}{\beta_{t}}+\frac{(\mathbf{x}_ {t-1}-\sqrt{\bar{\alpha}_{t-1}}\mathbf{x}_ {0})^{2}}{1-\bar{\alpha}_{t-1}}-\frac{(\mathbf{x}_ {t}-\sqrt{\bar{\alpha}_{t}}\mathbf{x}_ {0})^{2}}{1-\bar{\alpha}_{t}})) \\\\\
 % &= \text{exp}(-\frac{1}{2}(\frac{\mathbf{x}_ {t}^2-2\sqrt{\alpha_{t}}\mathbf{x}_ {t}\mathbf{x}_ {t-1}+\alpha_{t}\mathbf{x}_ {t-1}^2}{\beta_{t}}+\frac{\mathbf{x}_ {t-1}^2-2\sqrt{\bar\alpha_{t-1}}\mathbf{x}_ {0}\mathbf{x}_ {t-1}+\bar\alpha_{t-1}\mathbf{x}_ {0}^2}{1-\bar\alpha_{t-1}}-\frac{(\mathbf{x}_ {t}-\sqrt{\bar{\alpha}_{t}}\mathbf{x}_ {0})^{2}}{1-\bar{\alpha}_{t}})) \\\\\
@@ -161,13 +161,13 @@ L_{VLB} &= \mathbb{E}_{q(\mathbf{x}_ {0:T})}\left [\text{log}\frac{q(\mathbf{x}_
 &= \mathbb{E}_q\left [D_{KL}(q(\mathbf{x}_ {T}|\mathbf{x}_ {0}) || p_{\theta}(\mathbf{x}_ {T})) + \prod_{t=2}^TD_{KL}(q(\mathbf{x}_ {t-1}|\mathbf{x}_ {t}, \mathbf{x}_ {0}) || p_{\theta}(\mathbf{x}_ {t-1}|\mathbf{x}_ {t}))-\text{log}p_{\theta}(\mathbf{x}_ {0}|\mathbf{x}_ {1})\right ]
 \end{align}
 $$
-위의 식으로부터, $L_{VLB}$는 다음과 같이 분리됩니다.
+위의 식으로부터, $L_ {VLB}$는 다음과 같이 분리됩니다.
 $$
 \begin{align}
-L_{VLB}&=L_{T}+L_{T-1}+\cdot\cdot\cdot+L_{0} \\\\\
-\text{where} \ L_{T}&=D_{KL}(q(\mathbf{x}_ {T}|\mathbf{x}_ {0}) || p_{\theta}(\mathbf{x}_ {T})) \\\\\
-L_{t}&=D_{KL}(q(\mathbf{x}_ {t}|\mathbf{x}_ {t+1}, \mathbf{x}_ {0}) || p_{\theta}(\mathbf{x}_ {t}|\mathbf{x}_ {t+1})) \ \text{for} \ 1 \le t \le T-1 \\\\\
-L_{0}&=-\text{log}p_{\theta}(\mathbf{x}_ {0}|\mathbf{x}_ {1})
+L_ {VLB}&=L_ {T}+L_ {T-1}+\cdot\cdot\cdot+L_ {0} \\\\\
+\text{where} \ L_ {T}&=D_ {KL}(q(\mathbf{x}_ {T}|\mathbf{x}_ {0}) || p_{\theta}(\mathbf{x}_ {T})) \\\\\
+L_ {t}&=D_ {KL}(q(\mathbf{x}_ {t}|\mathbf{x}_ {t+1}, \mathbf{x}_ {0}) || p_{\theta}(\mathbf{x}_ {t}|\mathbf{x}_ {t+1})) \ \text{for} \ 1 \le t \le T-1 \\\\\
+L_ {0}&=-\text{log}p_ {\theta}(\mathbf{x}_ {0}|\mathbf{x}_ {1})
 \end{align}
 $$
 
