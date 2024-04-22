@@ -38,7 +38,7 @@ categories:
   - Diffusion
 ---
 
-## Physical Intuition
+### Physical Intuition
 Diffusion 아래의 그림과 같이 잉크를 물에 첨가하였을 때 퍼지게 되는 현상입니다.
 잉크는 시간이 지나면 결국 고르게 분포하게 되고 Uniform하게 됩니다. 이때, 처음 잉크가 첨가되었을 때의 잉크의 밀도를 구하는 것은 어렵습니다. 여기서, Uniform한 잉크를 다시 처음 상태로 돌릴 수 있으면 어떨까요?? 딥러닝을 통해 해결해 보자!!
 
@@ -46,7 +46,7 @@ Diffusion 아래의 그림과 같이 잉크를 물에 첨가하였을 때 퍼지
 
 잉크를 분자단위로 보게 되면, 작은 Sequence단위로 보게 되면 가우시안 분포내에서 shifting이 일어나게 됩니다.
 
-## Diffusion 
+### Diffusion 
 
 Diffusion은 아래의 그림과 같이 forward, reverse process로 구성됩니다. 
 Forward process는 원본 이미지에서 노이즈가 첨가되어 가는 과정, Reverse process는 노이즈에서 원본 이미지로 생성하는 과정입니다.
@@ -100,10 +100,17 @@ $$q(\mathbf{x}_ {t-1}|\mathbf{x}_ {t}, \mathbf{x}_ {0}) = \mathcal{N}(\mathbf{x}
 
 그리고 전체적인 Reverse 과정은 아래와 같습니다.
 
-$$ p_{\theta}(\mathbf{x}_ {0:T})=p(\mathbf{x}_ {T})\prod_{t=1}^Tp_{\theta}(\mathbf{x}_ {t-1}|\mathbf{x}_ {t}), \ p_{\theta}(\mathbf{x}_ {t-1}|\mathbf{x}_ {t})=\mathcal{N}(\mathbf{x}_ {t-1};\mu_{\theta}(\mathbf{x}_ {t},t), \sum_{\theta}(\mathbf{x}_t,t))$$
+$$ 
+\begin{align}
+p_{\theta}(\mathbf{x}_ {0:T})=p(\mathbf{x}_ {T})\prod_{t=1}^Tp_{\theta}(\mathbf{x}_ {t-1}|\mathbf{x}_ {t}) \\\\\
+p_{\theta}(\mathbf{x}_ {t-1}|\mathbf{x}_ {t})=\mathcal{N}(\mathbf{x}_ {t-1};\mu_{\theta}(\mathbf{x}_ {t},t), \sum_{\theta}(\mathbf{x}_t,t))
+\end{align}
+$$
+
 즉, 네트워크는 위의 평균과 분산을 가지는 가우시안 분포를 학습하게 됩니다.
 
 베이즈 룰을 적용하면 $q(\mathbf{x}_ {t-1}|\mathbf{x}_ {t})$를 아래처럼 유도가능하게 됩니다.
+
 $$
 \begin{align}
 q(\mathbf{x}_ {t-1}|\mathbf{x}_ {t},\mathbf{x}_ {0})&=q(\mathbf{x}_ {t}|\mathbf{x}_ {t-1},\mathbf{x}_ {0})\frac{q(\mathbf{x}_ {t-1}|\mathbf{x}_ {0})}{q(\mathbf{x}_ {t}|\mathbf{x}_ {0})} \\\\\
@@ -112,9 +119,11 @@ q(\mathbf{x}_ {t-1}|\mathbf{x}_ {t},\mathbf{x}_ {0})&=q(\mathbf{x}_ {t}|\mathbf{
 &= \text{exp}(-\frac{1}{2}((\frac{\alpha_{t}}{\beta_{t}}+\frac{1}{1-\bar\alpha_{t-1}})\mathbf{x}_ {t-1}^2-(\frac{2\sqrt{\alpha_{t}}}{\beta_{t}}\mathbf{x}_ {t}+\frac{2\sqrt{\bar\alpha_{t-1}}}{1-\bar\alpha_{t-1}}\mathbf{x}_ {0})\mathbf{x}_ {t-1}+C(\mathbf{x}_ {t},\mathbf{x}_ {0})))
 \end{align}
 $$
+
 여기서, $C(\mathbf{x}_ {t},\mathbf{x}_ {0})$는 $\mathbf{x}_ {t-1}$를 포함하지 않는 함수입니다. standard gaussian density function에 의해, 평균과 분산은 아래와 같이 parameterized됩니다.
 
 $$\tilde{\beta}=1/(\frac{\alpha_{t}}{\beta_{t}}+\frac{1}{1-\bar\alpha_{t-1}})=\frac{1-\bar\alpha_{t-1}}{1-\bar\alpha_{t}}\cdot\beta_{t}$$
+
 $$
 \begin{align}
 \tilde{\mu}(\mathbf{x}_ {t}, \mathbf{x}_ {0})&=(\frac{\sqrt{\alpha_{t}}}{\beta_{t}}\mathbf{x}_ {t}+\frac{\sqrt{\bar\alpha_{t-1}}}{1-\bar\alpha_{t-1}}\mathbf{x}_ {0})\frac{1-\bar\alpha_{t-1}}{1-\bar\alpha_{t}}\cdot\beta_{t} \\\\\
