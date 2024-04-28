@@ -115,13 +115,13 @@ $$
 q(\mathbf{x}_ {t-1}|\mathbf{x}_ {t},\mathbf{x}_ {0}) = q(\mathbf{x}_ {t}|\mathbf{x}_ {t-1},\mathbf{x}_ {0})\frac{q(\mathbf{x}_ {t-1}|\mathbf{x}_ {0})}{q(\mathbf{x}_ {t}|\mathbf{x}_ {0})}
 $$
 $$
-\propto\exp(-\frac{1}{2}(\frac{(\mathbf{x}_ {t}-\sqrt{\alpha_ {t}}\mathbf{x}_ {t-1})^{2}}{\beta_ {t}}+\frac{(\mathbf{x}_ {t-1}-\sqrt{\bar{\alpha}_ {t-1}}\mathbf{x}_ {0})^{2}}{1-\bar{\alpha}_ {t-1}}-\frac{(\mathbf{x}_ {t}-\sqrt{\bar{\alpha}_ {t}}\mathbf{x}_ {0})^{2}}{1-\bar{\alpha}_ {t}}))
+\propto\exp(-\frac{1}{2}(\frac{(\mathbf{x}_ {t}-\sqrt{\alpha_ {t}}\mathbf{x}_ {t-1})^{2}}{\beta_ {t}}+\frac{(\mathbf{x}_ {t-1}-\sqrt{\bar{\alpha}_ {t-1}}\mathbf{x}_ {0})^{2}}{1-\bar{\alpha}_ {t-1}} \\ -\frac{(\mathbf{x}_ {t}-\sqrt{\bar{\alpha}_ {t}}\mathbf{x}_ {0})^{2}}{1-\bar{\alpha}_ {t}}))
 $$
 $$
-= \exp(-\frac{1}{2}(\frac{\mathbf{x}_ {t}^2-2\sqrt{\alpha_ {t}}\mathbf{x}_ {t}\mathbf{x}_ {t-1}+\alpha_ {t}\mathbf{x}_ {t-1}^2}{\beta_ {t}}+\frac{\mathbf{x}_ {t-1}^2-2\sqrt{\bar\alpha_ {t-1}}\mathbf{x}_ {0}\mathbf{x}_ {t-1}+\bar\alpha_ {t-1}\mathbf{x}_ {0}^2}{1-\bar\alpha_ {t-1}}-\frac{(\mathbf{x}_ {t}-\sqrt{\bar{\alpha}_ {t}}\mathbf{x}_ {0})^{2}}{1-\bar{\alpha}_ {t}}))
+= \exp(-\frac{1}{2}(\frac{\mathbf{x}_ {t}^2-2\sqrt{\alpha_ {t}}\mathbf{x}_ {t}\mathbf{x}_ {t-1}+\alpha_ {t}\mathbf{x}_ {t-1}^2}{\beta_ {t}}+ \\ \frac{\mathbf{x}_ {t-1}^2-2\sqrt{\bar\alpha_ {t-1}}\mathbf{x}_ {0}\mathbf{x}_ {t-1}+\bar\alpha_ {t-1}\mathbf{x}_ {0}^2}{1-\bar\alpha_ {t-1}}-\frac{(\mathbf{x}_ {t}-\sqrt{\bar{\alpha}_ {t}}\mathbf{x}_ {0})^{2}}{1-\bar{\alpha}_ {t}}))
 $$
 $$
-= \exp(-\frac{1}{2}((\frac{\alpha_ {t}}{\beta_{t}}+\frac{1}{1-\bar\alpha_ {t-1}})\mathbf{x}_ {t-1}^2-(\frac{2\sqrt{\alpha_ {t}}}{\beta_ {t}}\mathbf{x}_ {t}+\frac{2\sqrt{\bar\alpha_ {t-1}}}{1-\bar\alpha_ {t-1}}\mathbf{x}_ {0})\mathbf{x}_ {t-1}+C(\mathbf{x}_ {t},\mathbf{x}_ {0})))
+= \exp(-\frac{1}{2}((\frac{\alpha_ {t}}{\beta_{t}}+\frac{1}{1-\bar\alpha_ {t-1}})\mathbf{x}_ {t-1}^2-(\frac{2\sqrt{\alpha_ {t}}}{\beta_ {t}}\mathbf{x}_ {t}+\frac{2\sqrt{\bar\alpha_ {t-1}}}{1-\bar\alpha_ {t-1}}\mathbf{x}_ {0})\mathbf{x}_ {t-1} \\ +C(\mathbf{x}_ {t},\mathbf{x}_ {0})))
 $$
 
 여기서, $C(\mathbf{x}_ {t},\mathbf{x}_ {0})$는 $\mathbf{x}_ {t-1}$를 포함하지 않는 함수입니다. standard gaussian density function에 의해, 평균과 분산은 아래와 같이 parameterized됩니다.
@@ -171,7 +171,7 @@ $$
 = \mathbb{E}_ q\left [-\text{log}p_ {\theta}(\mathbf{x}_ {T})+\prod_ {t=2}^T\text{log}\frac{q(\mathbf{x}_ {t}|\mathbf{x}_ {t-1})}{p_{\theta}(\mathbf{x}_ {t-1}|\mathbf{x}_ {t})}+\text{log}\frac{q(\mathbf{x}_ {1}|\mathbf{x}_ {0})}{p_ {\theta}(\mathbf{x}_ {0}|\mathbf{x}_ {1})} \right ]
 $$
 $$
-= \mathbb{E}_ q\left [-\text{log}p_ {\theta}(\mathbf{x}_ {T})+\prod_ {t=2}^T\text{log}(\frac{q(\mathbf{x}_ {t-1}|\mathbf{x}_ {t}, \mathbf{x}_ {0})}{p_ {\theta}(\mathbf{x}_ {t-1}|\mathbf{x}_ {t})} \cdot \frac{q(\mathbf{x}_ {t}|\mathbf{x}_ {0})}{q(\mathbf{x}_ {t-1}|\mathbf{x}_ {0})})+\text{log}\frac{q(\mathbf{x}_ {1}|\mathbf{x}_ {0})}{p_ {\theta}(\mathbf{x}_ {0}|\mathbf{x}_ {1})} \right ]
+= \mathbb{E}_ q\left [-\text{log}p_ {\theta}(\mathbf{x}_ {T})+\prod_ {t=2}^T\text{log}(\frac{q(\mathbf{x}_ {t-1}|\mathbf{x}_ {t}, \mathbf{x}_ {0})}{p_ {\theta}(\mathbf{x}_ {t-1}|\mathbf{x}_ {t})} \cdot \frac{q(\mathbf{x}_ {t}|\mathbf{x}_ {0})}{q(\mathbf{x}_ {t-1}|\mathbf{x}_ {0})})+ \text{log}\frac{q(\mathbf{x}_ {1}|\mathbf{x}_ {0})}{p_ {\theta}(\mathbf{x}_ {0}|\mathbf{x}_ {1})} \right ]
 $$
 $$
 = \mathbb{E}_ q\left [-\text{log}p_ {\theta}(\mathbf{x}_ {T})+\prod_ {t=2}^T\text{log}\frac{q(\mathbf{x}_ {t-1}|\mathbf{x}_ {t}, \mathbf{x}_ {0})}{p_ {\theta}(\mathbf{x}_ {t-1}|\mathbf{x}_ {t})}  + \prod_ {t=2}^T\text{log}\frac{q(\mathbf{x}_ {t}|\mathbf{x}_ {0})}{q(\mathbf{x}_ {t-1}|\mathbf{x}_ {0})}+\text{log}\frac{q(\mathbf{x}_ {1}|\mathbf{x}_ {0})}{p_ {\theta}(\mathbf{x}_ {0}|\mathbf{x}_ {1})} \right ]
