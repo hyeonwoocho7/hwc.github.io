@@ -159,31 +159,31 @@ $$
 
 $L_{VLB}$는 아래와 같이 KL-divergence 및 entropy term으로 전개할 수 있습니다.
 $$
-L_{VLB} = \mathbb{E}_{q(\mathbf{x}_ {0:T})}\left [\text{log}\frac{q(\mathbf{x}_ {1:T}|\mathbf{x}_ {0})}{p_{\theta}(\mathbf{x}_ {0:T})}\right ] 
+L_ {VLB} = \mathbb{E}_ {q(\mathbf{x}_ {0:T})}\left [\text{log}\frac{q(\mathbf{x}_ {1:T}|\mathbf{x}_ {0})}{p_{\theta}(\mathbf{x}_ {0:T})}\right ] 
 $$
 $$
-= \mathbb{E}_q \left [\text{log}\frac{\prod_{t=1}^Tq(\mathbf{x}_ {t}|\mathbf{x}_ {t-1})}{p_{\theta}(\mathbf{x}_ {T})\prod_{t=1}^{T}p_{\theta}(\mathbf{x}_ {t-1}|\mathbf{x}_ {t})}  \right ]
+= \mathbb{E}_ q \left [\text{log}\frac{\prod_ {t=1}^Tq(\mathbf{x}_ {t}|\mathbf{x}_ {t-1})}{p_{\theta}(\mathbf{x}_ {T})\prod_{t=1}^{T}p_{\theta}(\mathbf{x}_ {t-1}|\mathbf{x}_ {t})}  \right ]
 $$
 $$
-= \mathbb{E}_q\left [-\text{log}p_{\theta}(\mathbf{x}_ {T})+\prod_{t=1}^T\text{log}\frac{q(\mathbf{x}_ {t}|\mathbf{x}_ {t-1})}{p_{\theta}(\mathbf{x}_ {t-1}|\mathbf{x}_ {t})} \right ]
+= \mathbb{E}_ q\left [-\text{log}p_ {\theta}(\mathbf{x}_ {T})+\prod_ {t=1}^T\text{log}\frac{q(\mathbf{x}_ {t}|\mathbf{x}_ {t-1})}{p_{\theta}(\mathbf{x}_ {t-1}|\mathbf{x}_ {t})} \right ]
 $$
 $$
-= \mathbb{E}_q\left [-\text{log}p_{\theta}(\mathbf{x}_ {T})+\prod_{t=2}^T\text{log}\frac{q(\mathbf{x}_ {t}|\mathbf{x}_ {t-1})}{p_{\theta}(\mathbf{x}_ {t-1}|\mathbf{x}_ {t})}+\text{log}\frac{q(\mathbf{x}_ {1}|\mathbf{x}_ {0})}{p_{\theta}(\mathbf{x}_ {0}|\mathbf{x}_ {1})} \right ]
+= \mathbb{E}_ q\left [-\text{log}p_ {\theta}(\mathbf{x}_ {T})+\prod_ {t=2}^T\text{log}\frac{q(\mathbf{x}_ {t}|\mathbf{x}_ {t-1})}{p_{\theta}(\mathbf{x}_ {t-1}|\mathbf{x}_ {t})}+\text{log}\frac{q(\mathbf{x}_ {1}|\mathbf{x}_ {0})}{p_ {\theta}(\mathbf{x}_ {0}|\mathbf{x}_ {1})} \right ]
 $$
 $$
-= \mathbb{E}_q\left [-\text{log}p_{\theta}(\mathbf{x}_ {T})+\prod_{t=2}^T\text{log}(\frac{q(\mathbf{x}_ {t-1}|\mathbf{x}_ {t}, \mathbf{x}_ {0})}{p_{\theta}(\mathbf{x}_ {t-1}|\mathbf{x}_ {t})} \cdot \frac{q(\mathbf{x}_ {t}|\mathbf{x}_0)}{q(\mathbf{x}_ {t-1}|\mathbf{x}_0)})+\text{log}\frac{q(\mathbf{x}_ {1}|\mathbf{x}_ {0})}{p_{\theta}(\mathbf{x}_ {0}|\mathbf{x}_ {1})} \right ]
+= \mathbb{E}_ q\left [-\text{log}p_ {\theta}(\mathbf{x}_ {T})+\prod_ {t=2}^T\text{log}(\frac{q(\mathbf{x}_ {t-1}|\mathbf{x}_ {t}, \mathbf{x}_ {0})}{p_ {\theta}(\mathbf{x}_ {t-1}|\mathbf{x}_ {t})} \cdot \frac{q(\mathbf{x}_ {t}|\mathbf{x}_ {0})}{q(\mathbf{x}_ {t-1}|\mathbf{x}_ {0})})+\text{log}\frac{q(\mathbf{x}_ {1}|\mathbf{x}_ {0})}{p_ {\theta}(\mathbf{x}_ {0}|\mathbf{x}_ {1})} \right ]
 $$
 $$
-= \mathbb{E}_q\left [-\text{log}p_{\theta}(\mathbf{x}_ {T})+\prod_{t=2}^T\text{log}\frac{q(\mathbf{x}_ {t-1}|\mathbf{x}_ {t}, \mathbf{x}_ {0})}{p_{\theta}(\mathbf{x}_ {t-1}|\mathbf{x}_ {t})}  + \prod_{t=2}^T\text{log}\frac{q(\mathbf{x}_ {t}|\mathbf{x}_0)}{q(\mathbf{x}_ {t-1}|\mathbf{x}_0)}+\text{log}\frac{q(\mathbf{x}_ {1}|\mathbf{x}_ {0})}{p_{\theta}(\mathbf{x}_ {0}|\mathbf{x}_ {1})} \right ]
+= \mathbb{E}_ q\left [-\text{log}p_ {\theta}(\mathbf{x}_ {T})+\prod_ {t=2}^T\text{log}\frac{q(\mathbf{x}_ {t-1}|\mathbf{x}_ {t}, \mathbf{x}_ {0})}{p_ {\theta}(\mathbf{x}_ {t-1}|\mathbf{x}_ {t})}  + \prod_ {t=2}^T\text{log}\frac{q(\mathbf{x}_ {t}|\mathbf{x}_ {0})}{q(\mathbf{x}_ {t-1}|\mathbf{x}_ {0})}+\text{log}\frac{q(\mathbf{x}_ {1}|\mathbf{x}_ {0})}{p_ {\theta}(\mathbf{x}_ {0}|\mathbf{x}_ {1})} \right ]
 $$
 $$
-= \mathbb{E}_q\left [-\text{log}p_{\theta}(\mathbf{x}_ {T})+\prod_{t=2}^T\text{log}\frac{q(\mathbf{x}_ {t-1}|\mathbf{x}_ {t}, \mathbf{x}_ {0})}{p_{\theta}(\mathbf{x}_ {t-1}|\mathbf{x}_ {t})}  + \text{log}\frac{q(\mathbf{x}_ {T}|\mathbf{x}_0)}{q(\mathbf{x}_ {1}|\mathbf{x}_0)}+\text{log}\frac{q(\mathbf{x}_ {1}|\mathbf{x}_ {0})}{p_{\theta}(\mathbf{x}_ {0}|\mathbf{x}_ {1})} \right ]
+= \mathbb{E}_ q\left [-\text{log}p_ {\theta}(\mathbf{x}_ {T})+\prod_ {t=2}^T\text{log}\frac{q(\mathbf{x}_ {t-1}|\mathbf{x}_ {t}, \mathbf{x}_ {0})}{p_ {\theta}(\mathbf{x}_ {t-1}|\mathbf{x}_ {t})}  + \text{log}\frac{q(\mathbf{x}_ {T}|\mathbf{x}_ {0})}{q(\mathbf{x}_ {1}|\mathbf{x}_ {0})}+\text{log}\frac{q(\mathbf{x}_ {1}|\mathbf{x}_ {0})}{p_ {\theta}(\mathbf{x}_ {0}|\mathbf{x}_ {1})} \right ]
 $$
 $$
-= \mathbb{E}_q\left [-\text{log}\frac{q(\mathbf{x}_ {T}|\mathbf{x}_ {0})}{p_{\theta}(\mathbf{x}_ {T})} + \prod_{t=2}^T\text{log}\frac{q(\mathbf{x}_ {t-1}|\mathbf{x}_ {t}, \mathbf{x}_ {0})}{p_{\theta}(\mathbf{x}_ {t-1}|\mathbf{x}_ {t})}-\text{log}p_{\theta}(\mathbf{x}_ {0}|\mathbf{x}_ {1})\right ]
+= \mathbb{E}_ {q}\left [-\text{log}\frac{q(\mathbf{x}_ {T}|\mathbf{x}_ {0})}{p_ {\theta}(\mathbf{x}_ {T})} + \prod_ {t=2}^T\text{log}\frac{q(\mathbf{x}_ {t-1}|\mathbf{x}_ {t}, \mathbf{x}_ {0})}{p_ {\theta}(\mathbf{x}_ {t-1}|\mathbf{x}_ {t})}-\text{log}p_ {\theta}(\mathbf{x}_ {0}|\mathbf{x}_ {1})\right ]
 $$
 $$
-= \mathbb{E}_q\left [D_{KL}(q(\mathbf{x}_ {T}|\mathbf{x}_ {0}) || p_{\theta}(\mathbf{x}_ {T})) + \prod_{t=2}^TD_{KL}(q(\mathbf{x}_ {t-1}|\mathbf{x}_ {t}, \mathbf{x}_ {0}) || p_{\theta}(\mathbf{x}_ {t-1}|\mathbf{x}_ {t}))-\text{log}p_{\theta}(\mathbf{x}_ {0}|\mathbf{x}_ {1})\right ]
+= \mathbb{E}_ {q}\left [D_ {KL}(q(\mathbf{x}_ {T}|\mathbf{x}_ {0}) || p_ {\theta}(\mathbf{x}_ {T})) + \prod_ {t=2}^TD_ {KL}(q(\mathbf{x}_ {t-1}|\mathbf{x}_ {t}, \mathbf{x}_ {0}) || p_ {\theta}(\mathbf{x}_ {t-1}|\mathbf{x}_ {t}))-\text{log}p_ {\theta}(\mathbf{x}_ {0}|\mathbf{x}_ {1})\right ]
 $$
 
 위의 식으로부터, $L_{\text{VLB}}$는 다음과 같이 분리됩니다.
