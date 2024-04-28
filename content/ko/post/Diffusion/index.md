@@ -118,10 +118,10 @@ $$
 \propto\exp(-\frac{1}{2}(\frac{(\mathbf{x}_ {t}-\sqrt{\alpha_ {t}}\mathbf{x}_ {t-1})^{2}}{\beta_ {t}}+\frac{(\mathbf{x}_ {t-1}-\sqrt{\bar{\alpha}_ {t-1}}\mathbf{x}_ {0})^{2}}{1-\bar{\alpha}_ {t-1}}-\frac{(\mathbf{x}_ {t}-\sqrt{\bar{\alpha}_ {t}}\mathbf{x}_ {0})^{2}}{1-\bar{\alpha}_ {t}}))
 $$
 $$
-= \text{exp}(-\frac{1}{2}(\frac{\mathbf{x}_ {t}^2-2\sqrt{\alpha_{t}}\mathbf{x}_ {t}\mathbf{x}_ {t-1}+\alpha_{t}\mathbf{x}_ {t-1}^2}{\beta_{t}}+\frac{\mathbf{x}_ {t-1}^2-2\sqrt{\bar\alpha_{t-1}}\mathbf{x}_ {0}\mathbf{x}_ {t-1}+\bar\alpha_{t-1}\mathbf{x}_ {0}^2}{1-\bar\alpha_{t-1}}-\frac{(\mathbf{x}_ {t}-\sqrt{\bar{\alpha}_{t}}\mathbf{x}_ {0})^{2}}{1-\bar{\alpha}_{t}}))
+= \exp(-\frac{1}{2}(\frac{\mathbf{x}_ {t}^2-2\sqrt{\alpha_ {t}}\mathbf{x}_ {t}\mathbf{x}_ {t-1}+\alpha_ {t}\mathbf{x}_ {t-1}^2}{\beta_ {t}}+\frac{\mathbf{x}_ {t-1}^2-2\sqrt{\bar\alpha_ {t-1}}\mathbf{x}_ {0}\mathbf{x}_ {t-1}+\bar\alpha_ {t-1}\mathbf{x}_ {0}^2}{1-\bar\alpha_ {t-1}}-\frac{(\mathbf{x}_ {t}-\sqrt{\bar{\alpha}_ {t}}\mathbf{x}_ {0})^{2}}{1-\bar{\alpha}_ {t}}))
 $$
 $$
-= \text{exp}(-\frac{1}{2}((\frac{\alpha_{t}}{\beta_{t}}+\frac{1}{1-\bar\alpha_{t-1}})\mathbf{x}_ {t-1}^2-(\frac{2\sqrt{\alpha_{t}}}{\beta_{t}}\mathbf{x}_ {t}+\frac{2\sqrt{\bar\alpha_{t-1}}}{1-\bar\alpha_{t-1}}\mathbf{x}_ {0})\mathbf{x}_ {t-1}+C(\mathbf{x}_ {t},\mathbf{x}_ {0})))
+= \exp(-\frac{1}{2}((\frac{\alpha_ {t}}{\beta_{t}}+\frac{1}{1-\bar\alpha_ {t-1}})\mathbf{x}_ {t-1}^2-(\frac{2\sqrt{\alpha_ {t}}}{\beta_ {t}}\mathbf{x}_ {t}+\frac{2\sqrt{\bar\alpha_ {t-1}}}{1-\bar\alpha_ {t-1}}\mathbf{x}_ {0})\mathbf{x}_ {t-1}+C(\mathbf{x}_ {t},\mathbf{x}_ {0})))
 $$
 
 여기서, $C(\mathbf{x}_ {t},\mathbf{x}_ {0})$는 $\mathbf{x}_ {t-1}$를 포함하지 않는 함수입니다. standard gaussian density function에 의해, 평균과 분산은 아래와 같이 parameterized됩니다.
@@ -142,19 +142,19 @@ $$
 <img src="VAE.png" alt="Diffusion" width="400" height="150"/>
 
 $$
--\text{log}p_{\theta}(\mathbf{x}_ {0}) \leq -\text{log}p_{\theta}(\mathbf{x}_ {0}) + D_{KL}(q(\mathbf{x}_ {1:T}|\mathbf{x}_ {0})||p_{\theta}(\mathbf{x}_ {1:T}|\mathbf{x}_ {0}))
+-\text{log}p_ {\theta}(\mathbf{x}_ {0}) \leq -\text{log}p_{\theta}(\mathbf{x}_ {0}) + D_{KL}(q(\mathbf{x}_ {1:T}|\mathbf{x}_ {0})||p_{\theta}(\mathbf{x}_ {1:T}|\mathbf{x}_ {0}))
 $$
 $$
-= -\text{log}p_{\theta}(\mathbf{x}_ {0}) + \mathbb{E}_{\mathbf{x}_ {1:T} \sim q(\mathbf{x}_ {1:T}|\mathbf{x}_ {0})}\left [\text{log}\frac{q(\mathbf{x}_ {1:T}|\mathbf{x}_ {0})}{p_{\theta}(\mathbf{x}_ {0:T})/p_{\theta}(\mathbf{x}_ {0})}  \right ]
+= -\text{log}p_{\theta}(\mathbf{x}_ {0}) + \mathbb{E}_ {\mathbf{x}_ {1:T} \sim q(\mathbf{x}_ {1:T}|\mathbf{x}_ {0})}\left [\text{log}\frac{q(\mathbf{x}_ {1:T}|\mathbf{x}_ {0})}{p_ {\theta}(\mathbf{x}_ {0:T})/p_{\theta}(\mathbf{x}_ {0})}  \right ]
 $$
 $$
-= -\text{log}p_{\theta}(\mathbf{x}_ {0}) + \mathbb{E}_{q}\left [\text{log}\frac{q(\mathbf{x}_ {1:T}|\mathbf{x}_ {0})}{p_{\theta}(\mathbf{x}_ {0:T})}+\text{log}p_{\theta}(\mathbf{x}_ {0})  \right ]
+= -\text{log}p_ {\theta}(\mathbf{x}_ {0}) + \mathbb{E}_ {q}\left [\text{log}\frac{q(\mathbf{x}_ {1:T}|\mathbf{x}_ {0})}{p_ {\theta}(\mathbf{x}_ {0:T})}+\text{log}p_ {\theta}(\mathbf{x}_ {0})  \right ]
 $$
 $$
-= \mathbb{E}_{q}\left [\text{log}\frac{q(\mathbf{x}_ {1:T}|\mathbf{x}_ {0})}{p_{\theta}(\mathbf{x}_ {0:T})}\right ]
+= \mathbb{E}_ {q}\left [\text{log}\frac{q(\mathbf{x}_ {1:T}|\mathbf{x}_ {0})}{p_ {\theta}(\mathbf{x}_ {0:T})}\right ]
 $$
 $$
-\text{Let} \ L_{VLB} = \mathbb{E}_{q(\mathbf{x}_ {0:T})}\left [\text{log}\frac{q(\mathbf{x}_ {1:T}|\mathbf{x}_ {0})}{p_{\theta}(\mathbf{x}_ {0:T})}\right ] \geq \mathbb{E}_{q(\mathbf{x}_ {0})}\text{log}p_{\theta}(\mathbf{x}_ {0})
+\text{Let} \ L_{VLB} = \mathbb{E}_ {q(\mathbf{x}_ {0:T})}\left [\text{log}\frac{q(\mathbf{x}_ {1:T}|\mathbf{x}_ {0})}{p_{\theta}(\mathbf{x}_ {0:T})}\right ] \geq \mathbb{E}_ {q(\mathbf{x}_ {0})}\text{log}p_ {\theta}(\mathbf{x}_ {0})
 $$
 
 $L_{VLB}$는 아래와 같이 KL-divergence 및 entropy term으로 전개할 수 있습니다.
@@ -198,7 +198,7 @@ $$
 L_ {t}=D_ {KL}(q(\mathbf{x}_ {t}|\mathbf{x}_ {t+1}, \mathbf{x}_ {0}) || p_{\theta}(\mathbf{x}_ {t}|\mathbf{x}_ {t+1})) \ \text{for} \ 1 \le t \le T-1 
 $$
 $$
-L_ {0}=-\text{log}p_ {\theta}(\mathbf{x}_ {0}|\mathbf{x}_ {1}
+L_ {0}=-\text{log}p_ {\theta}(\mathbf{x}_ {0}|\mathbf{x}_ {1})
 $$
 
 $L_{T}$와 $L_{t}$는 두개의 가우시안 분포를 비교하는 항이 됩니다. 특히, $L_{T}$는 $q$가 학습 파라미터가 없고 $\mathbf{x}_ {T}$는 가우시안 노이즈이기에 constant한 값을 가진다는 것을 알 수 있습니다. 
@@ -216,24 +216,24 @@ $$
 $L_{t}$는 $\tilde{\mu}$와 차이를 최소하는 방향으로 학습됩니다.
 
 $$
-L_{t}=\mathbb{E}_{\mathbf{x}_ {0},\epsilon}\left [\frac{1}{2\left\|\sum_{\theta}(\mathbf{x}_ {t},t) \right\|_{2}^{2}}\left\| \tilde{\mu}(\mathbf{x}_ {t},t)-\mu_{\theta}(\mathbf{x}_ {t},t)\right\|^{2}  \right ]
+L_{t}=\mathbb{E}_ {\mathbf{x}_ {0},\epsilon}\left [\frac{1}{2\left\|\sum_ {\theta}(\mathbf{x}_ {t},t) \right\|_ {2}^{2}}\left\| \tilde{\mu}(\mathbf{x}_ {t},t)-\mu_ {\theta}(\mathbf{x}_ {t},t)\right\|^{2}  \right ]
 $$
 $$
-=\mathbb{E}_{\mathbf{x}_ {0},\epsilon}\left [\frac{1}{2\left\|\sum_{\theta} \right\|_{2}^{2}}\left\|\frac{1}{\sqrt{\alpha_{t}}}(\mathbf{x}_ {t}-\frac{1-\alpha_{t}}{\sqrt{1-\bar\alpha_{t}}}\epsilon_{t})- \frac{1}{\sqrt{\alpha_{t}}}(\mathbf{x}_ {t}-\frac{1-\alpha_{t}}{\sqrt{1-\bar\alpha_{t}}}\epsilon_{\theta}(\mathbf{x}_ {t},t))\right\|^{2}\right ] 
+=\mathbb{E}_ {\mathbf{x}_ {0},\epsilon}\left [\frac{1}{2\left\|\sum_ {\theta} \right\|_ {2}^{2}}\left\|\frac{1}{\sqrt{\alpha_ {t}}}(\mathbf{x}_ {t}-\frac{1-\alpha_ {t}}{\sqrt{1-\bar\alpha_ {t}}}\epsilon_ {t})- \frac{1}{\sqrt{\alpha_ {t}}}(\mathbf{x}_ {t}-\frac{1-\alpha_ {t}}{\sqrt{1-\bar\alpha_ {t}}}\epsilon_ {\theta}(\mathbf{x}_ {t},t))\right\|^{2}\right ] 
 $$
 $$
-=\mathbb{E}_{\mathbf{x}_ {0},\epsilon}\left [\frac{(1-\alpha_{t})^{2}}{2\alpha_{t}(1-\bar{\alpha}_{t})\left\|\sum_{\theta} \right\|_{2}^{2}}\left\|\epsilon_{t}-\epsilon_{\theta}(\mathbf{x}_ {t},t)\right\|^{2}\right ]
+=\mathbb{E}_ {\mathbf{x}_ {0},\epsilon}\left [\frac{(1-\alpha_ {t})^{2}}{2\alpha_ {t}(1-\bar{\alpha}_ {t})\left\|\sum_ {\theta} \right\|_ {2}^{2}}\left\|\epsilon_ {t}-\epsilon_ {\theta}(\mathbf{x}_ {t},t)\right\|^{2}\right ]
 $$
 $$
-=\mathbb{E}_{\mathbf{x}_ {0},\epsilon}\left [\frac{(1-\alpha_{t})^{2}}{2\alpha_{t}(1-\bar{\alpha}_{t})\left\|\sum_{\theta} \right\|_{2}^{2}}\left\|\epsilon_{t}-\epsilon_{\theta}(\sqrt{\bar{\alpha_{t}}}\mathbf{x}_ {0} + \sqrt{1-\bar{\alpha_{t}}}\epsilon_{t},t)\right\|^{2}\right ]
+=\mathbb{E}_ {\mathbf{x}_ {0},\epsilon}\left [\frac{(1-\alpha_ {t})^{2}}{2\alpha_ {t}(1-\bar{\alpha}_ {t})\left\|\sum_ {\theta} \right\|_ {2}^{2}}\left\|\epsilon_ {t}-\epsilon_ {\theta}(\sqrt{\bar{\alpha_ {t}}}\mathbf{x}_ {0} + \sqrt{1-\bar{\alpha_ {t}}}\epsilon_ {t},t)\right\|^{2}\right ]
 $$
 
 DDPM의 실험에서 위의 식의 앞부분인 weighting term은 무시하는게 diffusion model이 더 잘 작동된다는 결과로부터 아래의 식으로 simplify할 수 있습니다.
 $$
-L_{t}^{simple}=\mathbb{E}_{t \sim [1,T],\mathbf{x}_ {0},\epsilon_{t}}\left [\left\|\epsilon_{t}-\epsilon_{\theta}(\mathbf{x}_ {t},t) \right\|^{2}  \right ]
+L_{t}^{simple}=\mathbb{E}_ {t \sim [1,T],\mathbf{x}_  {0},\epsilon_ {t}}\left [\left\|\epsilon_ {t}-\epsilon_ {\theta}(\mathbf{x}_ {t},t) \right\|^{2}  \right ]
 $$
 $$
-=\mathbb{E}_{t \sim [1,T],\mathbf{x}_ {0},\epsilon_{t}}\left [\left\|\epsilon_{t}-\epsilon_{\theta}(\sqrt{\bar{\alpha_{t}}}\mathbf{x}_ {0} + \sqrt{1-\bar{\alpha_{t}}}\epsilon_{t},t) \right\|^{2}  \right ]
+=\mathbb{E}_ {t \sim [1,T],\mathbf{x}_ {0},\epsilon_{t}}\left [\left\|\epsilon_ {t}-\epsilon_ {\theta}(\sqrt{\bar{\alpha_ {t}}}\mathbf{x}_ {0} + \sqrt{1-\bar{\alpha_ {t}}}\epsilon_ {t},t) \right\|^{2}  \right ]
 $$
 
 
