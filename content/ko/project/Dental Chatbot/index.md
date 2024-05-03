@@ -1,9 +1,9 @@
 ---
 title: Dental Chatbot
-summary: A system for answering questions about dental-related question
+summary: A RAG system for answering questions about dental-related question. 
 tags:
   - Deep Learning
-date: '2024-04-01T00:00:00Z'
+date: '2024-05-03T00:00:00Z'
 
 # Optional external URL for project (replaces project detail page).
 external_link: ''
