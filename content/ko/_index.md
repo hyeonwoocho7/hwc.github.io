@@ -70,12 +70,11 @@ sections:
           date_start: '2024-03-15'
           date_end: ''
           description: |2-
-              AI Developement Team:
+              역할:
 
-              * Developed A RAG System for Answering  about Dental-Realated Questions. (AI chatbot)
-              * Developing A Crown Geneeration Model from 3D Mesh and Point-Cloud. (Graphics & Generation)
-              * Developing An Automated Orthodontic Treatment Planning System. (Graphics & Generation) 
-        - title: AI Research Scientist (Alternative Military Service)
+              * 분석
+              * 모델링
+              * 배포
         - title: AI 연구원 (전문연구요원)
           company: VUNO
           company_url: ''
@@ -84,10 +83,11 @@ sections:
           date_start: '2022-03-28'
           date_end: '2024-03-15'
           description: |2-
-              BLU3 Team (3D Domain):
+              역할:
 
-              * Developed A Early Dignosis AI system for Lung Cancer. (3D Lung CT)  
-              * Ansysis of Frontotemporal dementia (FTD) based Brain Volumetric Information. (3D Brain MRI)
+              * 분석
+              * 모델링
+              * 배포
         - title: 시스템 정보과학 석사 
           company: 규슈대학
           company_url: ''
