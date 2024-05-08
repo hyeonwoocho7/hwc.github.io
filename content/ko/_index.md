@@ -70,9 +70,9 @@ sections:
           date_start: '2024-03-15'
           date_end: ''
           description: |2-
-              역할:
+              AI 개발팀:
 
-              * 분석
+              * 
               * 모델링
               * 배포
         - title: AI 연구원 (전문연구요원)
@@ -83,11 +83,10 @@ sections:
           date_start: '2022-03-28'
           date_end: '2024-03-15'
           description: |2-
-              역할:
+              BLU3팀:
 
-              * 분석
-              * 모델링
-              * 배포
+              * 폐암 조기진단 시스템 개발. (3D Lung CT) 
+              * 뇌 영역별 세그멘테이션을 통한 Frontotemperal Dimentia 분석 (3D Brain MRI)
         - title: 시스템 정보과학 석사 
           company: 규슈대학
           company_url: ''

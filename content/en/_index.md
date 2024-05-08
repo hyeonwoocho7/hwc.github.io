@@ -72,9 +72,9 @@ sections:
           description: |2-
               AI Developement Team:
 
-              * Developed A RAG System for Answering  about Dental-Realated Questions. (AI chatbot)
-              * Developing A Crown Geneeration Model from 3D Mesh and Point-Cloud. (Graphics & Generation)
-              * Developing An Automated Orthodontic Treatment Planning System. (Graphics & Generation) 
+              * 치과 관련 질문에 답변하기 위한 RAG 시스템을 개발. (AI 챗봇 & RAG & LLM)
+              * 3D 매쉬와 포인트 클라우로부터 자동 치관(Crown) 생성 모델을 개발. (그래픽 및 생성)
+              * 불규칙한 배열의 치아로부터 자동 교정 치료 계획 시스템을 개발. (그래픽 및 생성)
         - title: AI Research Scientist (Alternative Military Service)
           company: VUNO
           company_url: ''
