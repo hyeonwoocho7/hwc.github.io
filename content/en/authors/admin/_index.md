@@ -139,5 +139,5 @@ social:
 highlight_name: true
 ---
 
-Hyeonwoo Cho is an AI research scientist at OSSTEM IMPLANT. His research interests include continual learning, test-time adaptation, and 3D vision. He recently developed a system for early diagnosis of lung cancer and a tool for analyzing multiple diseases associated with dementia from brain MRI. He is recently developing a AI chatbot for company's Q&A website using LLM and RAG system.
+Hyeonwoo Cho is an AI research scientist at OSSTEM IMPLANT. His research interests include Medical Imaging, Domain adaptation, and 3D vision. He developed a system for early diagnosis of lung cancer and a tool for analyzing multiple diseases associated with dementia from brain MRI.He is currently developing an AI that automatically generates crowns from point cloud dental scan data.
 {style="text-align: justify;"}
