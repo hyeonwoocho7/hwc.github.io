@@ -25,12 +25,12 @@ organizations:
     url: https://en.osstem.com/
 
 # Short bio (displayed in user profile at end of posts)
-bio: My research interests include continual learning, test-time adaptation and 3D vision.
+bio: My research interests include medical imaging, domain adaptation and 3D vision.
 
 # Interests to show in About widget
 interests:
-  - Continual Learning
-  - Test-time Adaptation
+  - Medical Imaging
+  - Domain Adaptation
   - Noisy Label Learning
   - 3D vision
   - Self-Supervised Learning
