@@ -22,11 +22,11 @@ featured: false
 
 # Featured image
 # Place an image named `featured.jpg/png` in this page's folder and customize its options here.
-# image:
-#   caption: 'LoRA exhibits better scalability and task performance.'
-#   focal_point: ''
-#   placement: 2
-#   preview_only: true
+image:
+  caption: 'Point Cloud Completion results of ODGNet'
+  focal_point: ''
+  placement: 2
+  preview_only: true
 
 authors:
   - admin
@@ -51,6 +51,8 @@ understanding이 필요합니다. 거기에, point cloud completion task는 하�
 
 제안방법은 incomplete point cloud가 입력으로 들어오게 되면 missing shape을 추론하여 complete point cloud를 생성합니다. 
 저자들은 coarse seed point들을 생성 및 그러한 points를 target resolution으로 upsampling 하기위해서 Seed Generation U-Net 및 Upsample Transformer를 디자인하였습니다. 
+
+<img src="Overview.png" alt="Idea" width="500"/>
 
 **Seed Generation U-Net**
 
