@@ -5,11 +5,10 @@ authors:
 - Hyeonwoo Cho
 - Ryoma Bise
 date: '2021-01-01'
-publishDate: '2023-12-21T01:35:10.043092Z'
+publishDate: '2024-08-05T08:24:23.750509Z'
 publication_types:
 - paper-conference
 publication: '*Medical Image Computing and Computer Assisted Intervention--MICCAI
   2021: 24th International Conference, Strasbourg, France, September 27--October 1,
   2021, Proceedings, Part VIII 24*'
-url_pdf: https://arxiv.org/abs/2107.08639
 ---

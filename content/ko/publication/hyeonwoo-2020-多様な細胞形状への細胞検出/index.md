@@ -5,7 +5,7 @@ authors:
 - Kazuya Nishimura
 - Ryoma Bise
 date: '2020-01-01'
-publishDate: '2023-12-21T01:35:10.049279Z'
+publishDate: '2024-08-05T08:24:23.756478Z'
 publication_types:
 - paper-conference
 publication: '*Record of 2020 Joint Conference of Electrical, Electronics and Information
