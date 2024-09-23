@@ -163,7 +163,7 @@ sections:
   #     columns: '2'
   #     view: card
   - block: collection
-    id: Underreview
+    id: Recent News
     content:
       title: Recent News
       subtitle: ''
