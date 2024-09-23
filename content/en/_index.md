@@ -165,7 +165,7 @@ sections:
   - block: collection
     id: Underreview
     content:
-      title: Under Review
+      title: Recent News
       subtitle: ''
       text: |-
         {{% callout note %}}
@@ -173,7 +173,7 @@ sections:
         {{% /callout %}}
       filters:
         folders:
-          - underreview
+          - Recent News
     design:
       columns: '2'
       view: list
