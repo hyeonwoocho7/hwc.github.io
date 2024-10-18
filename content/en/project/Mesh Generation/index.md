@@ -1,7 +1,6 @@
 ---
 title: Mesh Generation
-summary: Mesh Genration Project
-tags:
+summary: In this project, we build AI that generates a crown mesh from neighborhood tooth mesh.
   - Deep Learning
 date: '2024-10-18T00:00:00Z'
 
