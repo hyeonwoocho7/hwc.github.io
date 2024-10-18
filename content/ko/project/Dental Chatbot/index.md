@@ -30,3 +30,16 @@ url_video: ''
 # slides: example
 ---
 
+## Goal⛳️: RAG를 활용한 사내 웹사이트 챗봇 개발
+
+## Motivation 📚
+
+* 사이트내의 Q&A 질문들을 자동으로 답변하여 노동력 절감.
+* 충분한 양의 데이터 보유 (Q&A 질문 건수: 약 70,000건).
+* LLM 학습에는 많은 비용 (GPU 및 전력)이 요구되지만, RAG을 활용하게 되면 학습이 필요 없음.
+
+
+## Data 🏦
+<!-- ![screen reader text](website.png) -->
+
+<img src="website.png" width="450px" height="300px" title="website example" alt="website"></img><br/>
