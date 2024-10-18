@@ -40,6 +40,19 @@ url_video: ''
 
 
 ## Data 🏦
-<!-- ![screen reader text](website.png) -->
-
 <img src="website.png" width="450px" height="300px" title="website example" alt="website"></img><br/>
+
+* 데이터 구성
+  * 질문 번호
+  * 질문 카테고리
+  * 질문 제목 
+  * 질문 내용
+  * 답변 내용
+
+* 데이터 전처리
+  * 질문 혹은 답변의 길이가 매우 짧은 경우 사용 X.
+  * 질문과 답변이 연속적으로 이루어지는 경우, 답변에 질문이 포함되어 해당 항목을 제거.
+
+
+## Workflow 👓
+<img src="workflow.png" width="1000px" height="300px" title="website example" alt="website"></img><br/>
