@@ -55,4 +55,28 @@ url_video: ''
 
 
 ## Workflow 👓
+
+* 검색기(Retrieval): 유저의 질문에 대해 가장 관련성이 있는 정보를 데이터 베이스 (Vector Store)내에서 찾아내는 역할.
+* 생성기(LLM): 검색기에서 찾아진 정보를 바탕으로 유저의 질문에 대한 답변 생성 (Ex., ChatGPT, Llama2, 한국어 언어 모델)
+* Embedding Model: Document(Context)를 벡터화하는 모델.
+
 <img src="workflow.png" width="1000px" height="300px" title="website example" alt="website"></img><br/>
+
+
+## 실험 setup 🧪
+
+아래처럼, 정성적인 평가를 위해서 자체적으로 3개의 level로 나누어서 평가.
+* Level 1: 기존 질문(Context)에 대한 근거자료 일치도. (이를 통해 Vector의 quality와 검색기의 성능을 확인)
+  * 평가 방법: Context에 사용된 질문과 동일한 질문을 하여 근거 자료에 해당 질문과 답변이 있는지 확인하여 Embedding 정확도를 정성적으로 확인.
+
+* Level 2: 기존 질문(Context)와 비슷한 질문하기.
+  * 평가 방법: 기존 질문과 문맥은 비슷한지만 말투나 질문 형식을 변형시켜 시스템의 민감도를 확인.
+
+* Level 3: Context에 사용되지 않은 질문하기.
+  * 평가 방법: Context에 사용되지 않은 새로운 질문을 함으로서 시스템의 작동 및 결과 확인.
+
+
+
+  ## 실험 결과 👨‍🔬
+
+  
