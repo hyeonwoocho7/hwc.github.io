@@ -30,65 +30,64 @@ url_video: ''
 # slides: example
 ---
 
-## Goal⛳️: RAG를 활용한 사내 웹사이트 챗봇 개발
+## Goal⛳️: Developing an In-house Website Chatbot Using RAG
 
 ## Motivation 📚
 
-* 사이트내의 Q&A 질문들을 자동으로 답변하여 노동력 절감.
-* 충분한 양의 데이터 보유 (Q&A 질문 건수: 약 70,000건).
-* LLM 학습에는 많은 비용 (GPU 및 전력)이 요구되지만, RAG을 활용하게 되면 학습이 필요 없음.
+* Automate responses to Q&A questions on the site to reduce labor costs.
+* Sufficient amount of data available (Number of Q&A entries: about 70,000).
+* Training LLMs requires a lot of costs (GPU and power), but with RAG, no training is needed.
 
 
 ## Data 🏦
 <img src="website.png" width="450px" height="300px" title="website example" alt="website"></img><br/>
 
-* 데이터 구성
-  * 질문 번호
-  * 질문 카테고리
-  * 질문 제목 
-  * 질문 내용
-  * 답변 내용
+* Data Composition
+  * Question ID
+  * Question Category
+  * Question Title 
+  * Question Content
+  * Answer Content
 
-* 데이터 전처리
-  * 질문 혹은 답변의 길이가 매우 짧은 경우 사용 X.
-  * 질문과 답변이 연속적으로 이루어지는 경우, 답변에 질문이 포함되어 해당 항목을 제거.
-
+* Data Preprocessing
+  * Questions or answers that are too short are excluded.
+  * If a question and answer sequence includes the question in the answer, that entry is removed.
 
 ## Workflow 👓
 
-* 검색기(Retrieval): 유저의 질문에 대해 가장 관련성이 있는 정보를 데이터 베이스 (Vector Store)내에서 찾아내는 역할.
-* 생성기(LLM): 검색기에서 찾아진 정보를 바탕으로 유저의 질문에 대한 답변 생성 (Ex., ChatGPT, Llama2, 한국어 언어 모델)
-* Embedding Model: Document(Context)를 벡터화하는 모델.
+* Retriever: Responsible for finding the most relevant information in the database (Vector Store) based on the user's question.
+* Generator (LLM): Generates an answer to the user's question based on the information retrieved (e.g., ChatGPT, Llama2, Korean language models).
+* Embedding Model: A model that vectorizes the document (context).
 
 <img src="workflow.png" width="1000px" height="300px" title="website example" alt="website"></img><br/>
 
 
-## 실험 setup 🧪
+## Experiment setup 🧪
 
-아래처럼, 정성적인 평가를 위해서 자체적으로 3개의 level로 나누어서 평가.
-* Level 1: 기존 질문(Context)에 대한 근거자료 일치도. (이를 통해 Vector의 quality와 검색기의 성능을 확인)
-  * 평가 방법: Context에 사용된 질문과 동일한 질문을 하여 근거 자료에 해당 질문과 답변이 있는지 확인하여 Embedding 정확도를 정성적으로 확인.
+For qualitative evaluation, the system was divided into three levels, as follows:
+* Level 1: Checking the consistency of evidence materials with the existing questions (Context). (This is used to verify the quality of the vectors and the performance of the retriever.)
+  * Evaluation Method: Ask the same question used in the context to see if the evidence material includes the question and answer, qualitatively verifying the embedding accuracy.
 
-* Level 2: 기존 질문(Context)와 비슷한 질문하기.
-  * 평가 방법: 기존 질문과 문맥은 비슷한지만 말투나 질문 형식을 변형시켜 시스템의 민감도를 확인.
+* Level 2: Asking questions similar to the existing ones (Context).
+  * Evaluation Method: Slightly modify the tone or format of the existing questions to check the system's sensitivity.
 
-* Level 3: Context에 사용되지 않은 질문하기.
-  * 평가 방법: Context에 사용되지 않은 새로운 질문을 함으로서 시스템의 작동 및 결과 확인.
+* Level 3: Asking questions not used in the context.
+  * Evaluation Method: Test the system's operation and results by asking new questions not included in the context.
 
 
 
-## 실험 결과 👨‍🔬
-### Level 1 실험 결과
+## Experiment Results 👨‍🔬
+### Level 1 Experiment Results
 <img src="level1_results.png" width="1000px" height="700px" title="level1" alt="level1"></img><br/>
 
-* 동일한 질문을 하였을 때, 근거자료에 해당질문이 포함되어 있음을 관찰되므로, 벡터 검색이 잘 작동된다고 사료.
+* When the same question was asked, the evidence materials included that question, indicating that vector retrieval is working well.
 
-### Level 2 실험 결과
+### Level 2 Experiment Results
 <img src="level2_results.png" width="800px" height="1000px" title="level1" alt="level1"></img><br/>
 
-* 대부분의 테스트 데이터 셋에서 기존 질문에 나온 근거자료와 비슷한 맥락의 근거 자료가 예측됨.
+* In most test datasets, evidence materials with similar contexts to the existing questions were predicted.
 
-### Level 3 실험 결과
+### Level 3 Experiment Results
 <img src="level3_results.png" width="800px" height="700px" title="level1" alt="level1"></img><br/>
 
-* 기존에 받아본 적이 없는 질문을 받게 되면 아직 정확한 답변 생성이 어려움.
+* The system still struggles to generate accurate answers when asked new questions it has not encountered before.
