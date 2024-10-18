@@ -81,7 +81,14 @@ url_video: ''
 ### Level 1 실험 결과
 <img src="level1_results.png" width="1000px" height="700px" title="level1" alt="level1"></img><br/>
 
-### Level 2 실험 결과
+* 동일한 질문을 하였을 때, 근거자료에 해당질문이 포함되어 있음을 관찰되므로, 벡터 검색이 잘 작동된다고 사료.
 
+### Level 2 실험 결과
+<img src="level2_results.png" width="800px" height="1000px" title="level1" alt="level1"></img><br/>
+
+* 대부분의 테스트 데이터 셋에서 기존 질문에 나온 근거자료와 비슷한 맥락의 근거 자료가 예측됨.
 
 ### Level 3 실험 결과
+<img src="level3_results.png" width="800px" height="700px" title="level1" alt="level1"></img><br/>
+
+* 기존에 받아본 적이 없는 질문을 받게 되면 아직 정확한 답변 생성이 어려움.
