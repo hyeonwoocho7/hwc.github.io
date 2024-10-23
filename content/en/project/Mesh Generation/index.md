@@ -54,11 +54,10 @@ url_video: ''
 * Teeth are segmented by tooth number.
 * Pairs are formed between the adjacent and target teeth for each segmented tooth.
 
-## Approach
+## Approach 💡
 * Using the PoinTr model to solve the point completion problem, it is designed to understand the global positional information of adjacent teeth.
 * Additionally, MLP is attached to predict the normal vectors from the point cloud to generate the mesh surface.
 * To train the normal vector prediction, it is designed to solve the Poisson equation using Differentiable Poisson Surface Reconstruction.
-
 
 
 ## Workflow 👓
@@ -72,3 +71,4 @@ url_video: ''
 
 ## Results 👨‍🔬
 <img src="result.png" width="900px" height="700px" title="result" alt="result"></img><br/>
+The table shows the generated tooth mesh, the actual tooth mesh, the collision map between the two meshes, and the final result occluded with the adjacent teeth. When comparing the top surface of the generated tooth to the actual tooth, the curvatures and occlusion within the tooth appear to be well-reproduced. This indicates that global localization information from adjacent teeth was effectively incorporated through PoinTr, while local features of the mesh, such as surface details, were well-captured by training with Differentiable Poisson Surface Reconstruction.

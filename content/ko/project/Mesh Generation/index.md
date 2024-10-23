@@ -53,11 +53,10 @@ url_video: ''
 * Segmentation를 통해 치아 번호 분할.
 * 분할된 치아에 대해 각 치아별 인접 치아와 대상 치아로 쌍을 구성.
 
-## Approach
+## Approach 💡
 * PoinTr 모델을 활용하여 Point Completion 문제를 풀어, 인접 치아의 Global한 위치정보를 이해하도록 설계. 
 * 추가로, MLP를 뒷단에 붙여서 Mesh Surface를 생성하기 위해서 Point Cloud로부터 Normal Vector를 예측하도록 설계.
 * Normal Vector를 학습하기 위해서, Differentiable Poissong Surface Reconstruction를 활용하여 Poisson 방정식를 풀도록 설계.
-
 
 
 ## Workflow 👓
@@ -73,3 +72,5 @@ url_video: ''
 
 ## 실험 결과 👨‍🔬
 <img src="result.png" width="900px" height="700px" title="result" alt="result"></img><br/>
+위 표는 모델이 생성한 치아 메쉬, 실제 치아 메쉬, 두 메쉬 간의 충돌 맵, 그리고 인접 치아들과 합쳐서 교합된 최종 결과를 보여줍니다.
+실제 치아와의 치아 윗면을 비교해보았을 때, 치아 내의 굴곡과 교합이 상당히 잘 되어있는것으로 보입니다. 이는, PoinTr를 통해서 인접치아들과의 global localization 정보가 잘 반영되었고, 동시에 Differentiable Poisson Surface Reconstruction를 학습하여 Mesh의 local 특징인 표면이 잘 드러나보였습니다. 
