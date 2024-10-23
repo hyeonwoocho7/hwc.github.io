@@ -69,6 +69,16 @@ url_video: ''
 5. Sample point clouds and normal vectors from the GT mesh to create a GT grid.
 6. Train using Chamfer Distance Loss between the GT point cloud and the predicted point cloud, and MSE Loss between the GT grid and the prediction grid.
 
+### Differentiable Poisson Surface Reconstruction
+An approach to solving the Poisson equation to reconstruct an implicit surface from a point cloud and normal vectors:
+1. Convert the point cloud and normal vectors into a grid format.
+2. Transform the rasterized data into the frequency domain (Fourier Transform).
+3. Compute the divergence of the normal vectors.
+4. Calculate the Laplacian operator.
+5. Solve the Poisson equation (solution in the frequency domain).
+6. Transform the solution of the Poisson equation back into the spatial domain.
+7. Return the implicit surface field in the form of a 3D grid (represented as positive inside the surface, negative outside, and zero on the surface).
+
 ## Results 👨‍🔬
 <img src="result.png" width="900px" height="700px" title="result" alt="result"></img><br/>
 The table shows the generated tooth mesh, the actual tooth mesh, the collision map between the two meshes, and the final result occluded with the adjacent teeth. When comparing the top surface of the generated tooth to the actual tooth, the curvatures and occlusion within the tooth appear to be well-reproduced. This indicates that global localization information from adjacent teeth was effectively incorporated through PoinTr, while local features of the mesh, such as surface details, were well-captured by training with Differentiable Poisson Surface Reconstruction.

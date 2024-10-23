@@ -68,7 +68,15 @@ url_video: ''
 5. GT Mesh로부터 Point Cloud와 Normal vector를 샘플링하여 GT grid 생성.
 6. GT point cloud와 Predcition Point cloud사이의 Chamfer Distance Loss로 학습 및 GT grid와 Prediction grid간의 MSE Loss로 학습.
 
-
+### Differentiable Poisson Surface Reconstruction
+포인트 클라우드와 법선 벡터로부터 implicit surface를 재구성하기위해 Poisson 방정식 푸는 접근 방식.
+1. 포인트 클라우드과 법선 벡터를 그리드 형태로 변환
+2. 레스터화된 데이터를 주파수 도메인으로 변환 (Fourier Transform)
+3. 법선 벡터의 발산 (divergence) 계산
+4. Laplacian 연산자 계산
+5. Poisson 방정식 해 계산(주파수 도메인의 해)
+6. Poisson 방정식의 해를 공간 도메인으로 변환
+7. 3D grid 형태의 implicit surface field 반환 (표면 내부에서 양수, 외부에서 음수, 표면에서 0으로 표현)
 
 ## 실험 결과 👨‍🔬
 <img src="result.png" width="900px" height="700px" title="result" alt="result"></img><br/>
