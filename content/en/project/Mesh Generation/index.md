@@ -70,3 +70,5 @@ url_video: ''
 5. Sample point clouds and normal vectors from the GT mesh to create a GT grid.
 6. Train using Chamfer Distance Loss between the GT point cloud and the predicted point cloud, and MSE Loss between the GT grid and the prediction grid.
 
+## Results 👨‍🔬
+<img src="result.png" width="900px" height="700px" title="result" alt="result"></img><br/>
