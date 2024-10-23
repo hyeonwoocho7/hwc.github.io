@@ -30,3 +30,25 @@ url_video: ''
 # slides: example
 ---
 
+## Goal⛳️: 인접 치아 메쉬로부터 크라운 메쉬 생성
+
+
+
+## Motivation 📚
+
+
+
+## Data 🏦
+
+
+
+## Workflow 👓
+<img src="workflow.png" width="900px" height="300px" title="workflow" alt="workflow"></img><br/>
+
+
+## 실험 setup 🧪
+
+
+
+
+## 실험 결과 👨‍🔬
