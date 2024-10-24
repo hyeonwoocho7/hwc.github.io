@@ -10,6 +10,6 @@ date: '2024-01-01'
 publishDate: '2024-02-05T00:30:47.416636Z'
 publication_types:
 - article-journal
-publication: 'Asian Conference on Computer Vision'
+publication: 'Asian Conference on Computer Vision - ACCV 2024'
 url_pdf: https://arxiv.org/abs/2401.14587
 ---
