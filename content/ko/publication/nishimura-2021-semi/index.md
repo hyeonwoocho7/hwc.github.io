@@ -11,4 +11,6 @@ publication_types:
 publication: '*Medical Image Computing and Computer Assisted Intervention--MICCAI
   2021: 24th International Conference, Strasbourg, France, September 27--October 1,
   2021, Proceedings, Part VIII 24*'
+url_pdf: https://arxiv.org/abs/2107.08639
+url_code: https://github.com/naivete5656/SCDTC
 ---

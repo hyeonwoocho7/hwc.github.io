@@ -11,4 +11,6 @@ publishDate: '2024-10-24T06:41:24.585256Z'
 publication_types:
 - article-journal
 publication: '*Asian Conference on Computer Vision*'
+url_pdf: https://arxiv.org/abs/2401.14587
+url_code: https://github.com/hyeonwoocho7/cng-sfda
 ---

@@ -13,4 +13,5 @@ publishDate: '2024-10-24T06:41:24.593939Z'
 publication_types:
 - article-journal
 publication: '*arXiv preprint arXiv:2407.10733*'
+url_pdf: https://arxiv.org/abs/2407.10733
 ---
