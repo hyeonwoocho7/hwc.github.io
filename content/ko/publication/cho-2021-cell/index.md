@@ -6,7 +6,7 @@ authors:
 - Kazuhide Watanabe
 - Ryoma Bise
 date: '2021-01-01'
-publishDate: '2024-08-05T08:24:23.744533Z'
+publishDate: '2024-10-24T06:41:24.623945Z'
 publication_types:
 - paper-conference
 publication: '*Medical Image Computing and Computer Assisted Intervention--MICCAI

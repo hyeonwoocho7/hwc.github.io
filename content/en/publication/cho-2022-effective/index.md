@@ -7,9 +7,8 @@ authors:
 - Kazuhide Watanabe
 - Ryoma Bise
 date: '2022-01-01'
-publishDate: '2023-12-21T01:35:10.028202Z'
+publishDate: '2024-10-24T06:41:24.618158Z'
 publication_types:
 - article-journal
 publication: '*Medical Image Analysis*'
-url_pdf: https://arxiv.org/abs/2303.05269
 ---
