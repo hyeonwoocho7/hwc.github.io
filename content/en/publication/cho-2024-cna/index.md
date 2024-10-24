@@ -1,9 +1,9 @@
 ---
-title: 'CNA-TTA: Clean and Noisy Region Aware Feature Learning within Clusters for
-  Online-Offline Test-Time Adaptation'
+title: 'CNG-SFDA:Clean-and-Noisy Region Guided Online-Offline Source-Free Domain Adaptation'
 authors:
 - Hyeonwoo Cho
 - Chanmin Park
+- Dong-Hee Kim
 - Jinyoung Kim
 - Won Hwa Kim
 date: '2024-01-01'
