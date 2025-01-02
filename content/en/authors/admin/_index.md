@@ -25,14 +25,14 @@ organizations:
     url: https://en.osstem.com/
 
 # Short bio (displayed in user profile at end of posts)
-bio: My research interests include medical imaging, domain adaptation and 3D vision.
+bio: My research interests include domain adaptation and 3D vision.
 
 # Interests to show in About widget
 interests:
-  - Medical Imaging
   - Domain Adaptation
-  - Noisy Label Learning
   - 3D vision
+  - Noisy Label Learning
+  - Medical Imaging
   - Self-Supervised Learning
   - Semi-Supervised Learning
   - MultiModal
@@ -139,5 +139,6 @@ social:
 highlight_name: true
 ---
 
-Hyeonwoo Cho is an AI research scientist at OSSTEM IMPLANT. His research interests include Medical Imaging, Domain adaptation, and 3D vision. He developed a system for early diagnosis of lung cancer and a tool for analyzing multiple diseases associated with dementia from brain MRI.He is currently developing an AI that automatically generates crowns from point cloud dental scan data.
+Hyeonwoo Cho is an AI researcher at OSSTEM IMPLANT. He received his bachelor’s and master’s degrees from
+Kyushu University. Additionally, I have worked as an AI researcher at VUNO. My research interests include Domain Adaptation and 3D Vision.
 {style="text-align: justify;"}
